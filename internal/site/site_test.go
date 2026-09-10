@@ -37,9 +37,24 @@ func TestHandler(t *testing.T) {
 	}
 }
 
+func TestAssetVersionInjected(t *testing.T) {
+	h := Handler()
+	for _, path := range []string{"/", "/resume.html"} {
+		rec := httptest.NewRecorder()
+		h.ServeHTTP(rec, httptest.NewRequest(http.MethodGet, path, nil))
+		body := rec.Body.String()
+		if strings.Contains(body, "?v=dev") {
+			t.Errorf("%s 仍有 ?v=dev 佔位，版本沒有注入", path)
+		}
+		if !strings.Contains(body, "style.css?v=") || !strings.Contains(body, "app.js?v=") && path == "/" {
+			t.Errorf("%s 缺少帶版本的 css/js 連結", path)
+		}
+	}
+}
+
 func TestCacheHeaders(t *testing.T) {
 	h := Handler()
-	for path, want := range map[string]string{"/": "no-cache", "/style.css": "public, max-age=86400"} {
+	for path, want := range map[string]string{"/": "no-cache", "/style.css": "no-cache", "/assets/court.jpg": "public, max-age=86400"} {
 		rec := httptest.NewRecorder()
 		h.ServeHTTP(rec, httptest.NewRequest(http.MethodGet, path, nil))
 		if got := rec.Header().Get("Cache-Control"); got != want {

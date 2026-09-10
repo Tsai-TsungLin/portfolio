@@ -82,14 +82,39 @@
     });
   });
 
-  // 卡片展開細節
-  document.querySelectorAll('.card-more').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var open = btn.getAttribute('aria-expanded') !== 'true';
-      btn.setAttribute('aria-expanded', String(open));
-      btn.firstChild.textContent = open ? '收合 ' : '細節 ';
-      btn.nextElementSibling.classList.toggle('open', open);
+  // 細節用 modal 顯示：把該張卡片的內容複製進 dialog，卡片本身高度不變
+  var modal = document.getElementById('modal');
+  var modalBody = document.getElementById('modalBody');
+  var lastFocus = null;
+  function openModal(card) {
+    modalBody.innerHTML = '';
+    ['.card-img', '.card-top', 'h3', '.card-sum', '.card-detail', '.tags'].forEach(function (sel) {
+      var el = card.querySelector(sel);
+      if (el) {
+        var copy = el.cloneNode(true);
+        if (sel === 'h3') copy.id = 'modalTitle';
+        modalBody.appendChild(copy);
+      }
     });
+    lastFocus = document.activeElement;
+    document.body.classList.add('modal-open');
+    if (typeof modal.showModal === 'function') modal.showModal(); else modal.setAttribute('open', '');
+    document.getElementById('modalClose').focus();
+  }
+  function closeModal() {
+    if (modal.open) modal.close(); else modal.removeAttribute('open');
+  }
+  modal.addEventListener('close', function () {
+    document.body.classList.remove('modal-open');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  // 點背景關閉：dialog 本身佔滿視窗，點到的不是卡片內容就關
+  modal.addEventListener('click', function (e) {
+    if (!e.target.closest('.modal-card')) closeModal();
+  });
+  document.querySelectorAll('.card-more').forEach(function (btn) {
+    btn.addEventListener('click', function () { openModal(btn.closest('.card')); });
   });
 
   var year = document.getElementById('year');

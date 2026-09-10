@@ -162,15 +162,36 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .tags li { font-family: var(--mono); font-size: 11.5px; padding: 4px 9px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); }
 .card-more { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 4px; font-size: 14px; font-weight: 500; color: var(--accent); }
 .card-more svg { width: 14px; height: 14px; transition: transform 0.3s var(--ease); }
-.card-more[aria-expanded="true"] svg { transform: rotate(180deg); }
+.card-more:hover svg { transform: translate(2px, -2px); }
 /* 展開：grid-template-rows 0fr → 1fr 可以做高度動畫，不用算 px */
-.card-detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s var(--ease); }
-.card-detail > div { overflow: hidden; }
-.card-detail.open { grid-template-rows: 1fr; }
-.card-detail ul { display: grid; gap: 8px; padding-top: 4px; font-size: 14.5px; color: var(--ink-2); }
+/* 細節內容留在卡片裡（給搜尋引擎與無 JS），畫面上由 modal 顯示 */
+.card-detail { display: none; }
+.card-detail ul { display: grid; gap: 10px; font-size: 15px; color: var(--ink-2); }
 .card-detail li { padding-left: 18px; position: relative; }
-.card-detail li::before { content: ""; position: absolute; left: 0; top: 11px; width: 8px; height: 1.5px; background: var(--accent-2); }
-.card-role { margin-top: 14px; font-size: 13px; color: var(--muted); font-family: var(--mono); }
+.card-detail li::before { content: ""; position: absolute; left: 0; top: 12px; width: 8px; height: 1.5px; background: var(--accent-2); }
+.card-role { margin-top: 18px; font-size: 13px; color: var(--muted); font-family: var(--mono); }
+
+
+/* Modal */
+.modal { border: 0; padding: 0; background: transparent; max-width: none; max-height: none; width: 100%; height: 100%; }
+.modal::backdrop { background: rgba(58, 46, 38, 0.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.modal[open] { display: grid; place-items: center; padding: 20px; box-sizing: border-box; }
+.modal-card {
+  position: relative; width: min(720px, 100%); max-height: min(86vh, 900px); overflow: auto;
+  background: var(--card); color: var(--ink); border-radius: 24px; border: 1px solid var(--line); box-shadow: 0 30px 80px -30px rgba(58, 46, 38, 0.6);
+  padding: 28px 30px 30px; animation: modal-in 0.35s var(--ease);
+}
+@keyframes modal-in { from { opacity: 0; transform: translateY(14px) scale(0.98); } }
+.modal-close { position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 50%; font-size: 26px; line-height: 1; color: var(--muted); background: var(--card-2); }
+.modal-close:hover { color: var(--ink); }
+.modal-body .card-img { margin: 0 0 18px; aspect-ratio: 16 / 8; }
+.modal-body .card-top { margin-bottom: 12px; padding-right: 48px; }
+.modal-body h3 { font-size: 24px; margin-bottom: 4px; }
+.modal-body h3 small { display: block; font-size: 14px; font-weight: 400; color: var(--muted); margin-top: 4px; }
+.modal-body .card-sum { margin: 14px 0 18px; font-size: 15.5px; }
+.modal-body .card-detail { display: block; }
+.modal-body .tags { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+body.modal-open { overflow: hidden; }
 
 /* 架構圖：用 CSS 方塊畫，不用圖檔 */
 .infra { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; align-items: start; }
@@ -201,10 +222,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .timeline { display: grid; gap: 0; position: relative; }
 .timeline::before { content: ""; position: absolute; left: 7px; top: 12px; bottom: 12px; width: 1px; background: var(--line); }
 .job { display: grid; grid-template-columns: 40px 180px 1fr; gap: 18px; padding: 20px 0; position: relative; }
+/* 明確指定欄位：第 1 欄留給圓點，不靠自動排位 */
+.job-when { grid-column: 2; }
+.job > div { grid-column: 3; }
 .job + .job { border-top: 1px solid var(--line); }
 .job::before { content: ""; position: absolute; left: 3px; top: 30px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent-2); border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--accent-2); }
 .job.now::before { background: var(--ok); box-shadow: 0 0 0 1px var(--ok); }
-.job-when { font-family: var(--mono); font-size: 12.5px; color: var(--muted); padding-top: 4px; }
+.job-when { grid-column: 2; font-family: var(--mono); font-size: 12.5px; color: var(--muted); padding-top: 4px; }
 .job h3 { font-size: 17px; }
 .job h3 small { display: block; font-size: 13.5px; color: var(--muted); font-weight: 400; margin-top: 2px; }
 .job p { margin-top: 8px; font-size: 14.5px; color: var(--ink-2); max-width: 46em; }
@@ -268,9 +292,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .grid, .skills { grid-template-columns: repeat(2, 1fr); }
   .hero-stats { grid-template-columns: repeat(2, 1fr); }
   .infra, .about { grid-template-columns: 1fr; }
-  .job { grid-template-columns: 40px 1fr; }
-  .job-when { grid-column: 2; }
-  .job > div { grid-column: 2; }
+  /* 窄螢幕不用 grid：日期在上、內容在下，避免不同瀏覽器的自動排位差異 */
+  .job { display: block; padding-left: 40px; }
+  .job-when { display: block; margin-bottom: 6px; padding-top: 0; }
+  .job::before { top: 26px; }
 }
 @media (max-width: 640px) {
   .wrap { width: min(1120px, 100% - 32px); }
@@ -284,6 +309,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .nav .btn { display: none; }
   .tier { grid-template-columns: 1fr; gap: 8px; }
   .contact { padding: 40px 22px; }
+  .modal[open] { padding: 12px; }
+  .modal-card { padding: 22px 18px 24px; border-radius: 18px; }
+  .modal-body h3 { font-size: 20px; }
   .resume { padding: 32px 22px; margin-top: 16px; }
   .resume .entry, .resume .skill-rows div { grid-template-columns: 1fr; gap: 4px; }
   .resume .contact-list { text-align: left; }

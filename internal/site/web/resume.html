@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=dev">
 </head>
 <body>
 <div class="bg-blobs" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -18,12 +18,16 @@
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="brand" href="./"><i></i>relexes</a>
-    <nav class="nav-links" aria-label="主選單">
+    <nav class="nav-links" id="navLinks" aria-label="主選單">
       <a href="./#work">作品</a>
+      <a href="./#infra">架構</a>
+      <a href="./#skills">技能</a>
       <a href="./#experience">經歷</a>
+      <a href="./#about">關於</a>
       <a href="resume.html" class="active">履歷</a>
     </nav>
     <button class="btn" onclick="window.print()">列印 / 存成 PDF</button>
+    <button class="nav-toggle" id="navToggle" aria-label="開啟選單" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -44,7 +48,7 @@
 
     <section>
       <h2>摘要</h2>
-      <p class="summary">五年 Go 後端工程師，經歷監控代理產品、遊戲與線上娛樂平台微服務、金流與 P2P 交易、資料層遷移等領域，能獨立從零初始化服務、設計資料表與 API、處理併發與穩定性問題。同時以個人專案完成夜市飲料 POS、羽球輪換系統等實際上線且有人在用的產品，涵蓋前端、後端、硬體串接與部署維運。轉職前有三年技術客服與資料對帳經驗，習慣從業務與資料兩個視角看系統。</p>
+      <p class="summary">五年 Go 後端工程師，經歷監控代理產品、遊戲與線上娛樂平台微服務、金流與 P2P 交易、資料層遷移等領域，能獨立從零初始化服務、設計資料表與 API、處理併發與穩定性問題；做過千萬筆等級資料的測試與效能優化，關鍵查詢從 3 秒縮到 50 毫秒。同時以個人專案完成夜市飲料 POS、羽球輪換系統等實際上線且有人在用的產品，涵蓋前端、後端、硬體串接與部署維運。轉職前有三年技術客服與資料對帳經驗，習慣從業務與資料兩個視角看系統。</p>
     </section>
 
     <section>
@@ -54,7 +58,8 @@
         <div>
           <h3>威智有限公司 <small>· Golang 後端工程師</small></h3>
           <ul>
-            <li>遊戲服務效能優化與遊戲商串接，處理約 400 萬筆規模的資料</li>
+            <li>優化既有專案整體架構：評估並建議移除 git submodule 依賴、重新規劃資料庫索引；團隊約 10 人</li>
+            <li>遊戲商串接（目前一家），處理約 400 萬筆規模的資料</li>
           </ul>
         </div>
       </div>
@@ -69,7 +74,8 @@
             <li>從零接入 EXPAY 金流：充值、提款、C2C、Webhook 回調、加解密、敏感 log 管控、匯率預扣與取消退款</li>
             <li>代理提款流程、福利中心（簽到、邀請獎勵、狀態機修正）；推動 RabbitMQ 事件驅動重構解耦通知與排程</li>
             <li>注單資料 MySQL → Elasticsearch 遷移，建立跨服務帳變查詢中心；為 10+ 服務加上 HTTP / gRPC Health Check 支援 K8s Probe</li>
-            <li>穩定性修復：SQL Injection 防護、排序欄位白名單、sync.Once 初始化、DB Statement / Redis 連線 / goroutine 洩漏排查</li>
+            <li>千萬筆等級資料的測試與效能優化：移除過多的 queue 類排程改用 RabbitMQ 事件驅動，CPU 使用率下降；關鍵查詢從 3 秒縮到 50 毫秒</li>
+            <li>穩定性修復：修正既有 bug、SQL Injection 防護、排序欄位白名單、sync.Once 初始化、DB Statement / Redis 連線 / goroutine 洩漏排查</li>
           </ul>
         </div>
       </div>
@@ -78,7 +84,7 @@
         <div>
           <h3>接案 <small>· 後端工程師</small></h3>
           <ul>
-            <li>外包獎勵中心系統（簽到、代理邀請獎勵），以 RabbitMQ 與 Redis queue 處理大量資料，不阻塞主流程</li>
+            <li>一人接案，依對方公司的功能卡片逐項交付：獎勵中心系統（簽到、代理邀請獎勵），以 RabbitMQ 與 Redis queue 處理大量資料，不阻塞主流程</li>
           </ul>
         </div>
       </div>
@@ -99,8 +105,8 @@
         <div>
           <h3>精誠資訊股份有限公司 <small>· 後端工程師 · 台北</small></h3>
           <ul>
-            <li>主機監控代理產品：復刻 blackbox scan、SNMP、NMAP 與 remote_write，結果回送 RabbitMQ / Prometheus / OpenSearch</li>
-            <li>RabbitMQ producer / consumer 套件、OpenSearch 模組、Splunk API 串接；可用 Docker 或系統服務形式部署到客戶端</li>
+            <li>主機監控代理產品：以系統服務或 Docker 部署在客戶端內網，主動採集主機資訊（CPU / 磁碟 / 路由）、SNMP 與網路掃描結果，經 RabbitMQ 回送中心，避開客戶端防火牆限制</li>
+            <li>資料寫入 Prometheus（remote_write）與 OpenSearch 供監控與查詢，串接 Splunk API；RabbitMQ producer / consumer 與 OpenSearch 模組寫成共用套件，以處理速度為優先優化</li>
           </ul>
         </div>
       </div>
@@ -130,27 +136,27 @@
     <section>
       <h2>個人專案（皆已上線或運行中）</h2>
       <div class="entry">
-        <span class="when">Go · SQLite · 樹莓派</span>
-        <div><h3>夜市飲料餐車 POS</h3><ul><li>iPad 瀏覽器點餐、樹莓派直驅出單機（ESC/POS）與貼紙機（TSPL），離線優先、斷電不掉單、有網路時同步雲端；雲端多分店報表、線上更新菜單、OTA 更新</li></ul></div>
+        <span class="when">2024/8 — 現在<br>Go · SQLite · 樹莓派</span>
+        <div><h3>夜市飲料餐車 POS <small>· 3 家攤商使用中</small></h3><ul><li>iPad 瀏覽器點餐、樹莓派直驅出單機（ESC/POS）與貼紙機（TSPL），離線優先、斷電不掉單、有網路時同步雲端；雲端多分店報表、線上更新菜單、OTA 更新</li></ul></div>
       </div>
       <div class="entry">
-        <span class="when">Go · SSE · LINE Bot</span>
-        <div><h3>羽球輪換系統</h3><ul><li>iPad 拖曳排場、多裝置即時同步、觀戰 QR、LINE 群組報名；多租戶月費制與管理後台（登入鎖定、IP 黑名單、異動紀錄）</li></ul></div>
+        <span class="when">2025/10 — 現在<br>Go · SSE · LINE Bot</span>
+        <div><h3>羽球輪換系統 <small>· 5 個球隊每週使用中</small></h3><ul><li>iPad 拖曳排場、多裝置即時同步、觀戰 QR、LINE 群組報名；多租戶月費制與管理後台（登入鎖定、IP 黑名單、異動紀錄）</li></ul></div>
       </div>
       <div class="entry">
-        <span class="when">Go · PostgreSQL · React</span>
+        <span class="when">2022/1 — 現在<br>Go · PostgreSQL · React</span>
         <div><h3>多聯盟盤口與賽事系統</h3><ul><li>NBA / MLB / KBO 盤口異動 LINE 推播、Dashboard、投注紀錄與 AI 分析復盤週報</li></ul></div>
       </div>
       <div class="entry">
-        <span class="when">Go · Python · React</span>
+        <span class="when">2026/3 — 現在<br>Go · Python · React</span>
         <div><h3>台指期自動交易系統</h3><ul><li>策略引擎與風控（Go）、回測與券商下單微服務（Python）、WebSocket 即時報價前端；目前模擬模式運行</li></ul></div>
       </div>
       <div class="entry">
-        <span class="when">Go · Flutter · pgvector</span>
+        <span class="when">2026/4 — 現在<br>Go · Flutter · pgvector</span>
         <div><h3>拾光 — 智慧失物招領 App</h3><ul><li>AI 圖像特徵比對媒合、PostGIS 地理查詢、OTP / Google / Apple 登入、管理後台；完成 App Store 與 Google Play 上架流程</li></ul></div>
       </div>
       <div class="entry">
-        <span class="when">維運</span>
+        <span class="when">2026/4 — 現在<br>維運</span>
         <div><h3>單機多服務基礎設施</h3><ul><li>一台 GCP VM 跑十幾個容器：Cloudflare + nginx + 每網域獨立憑證、容器記憶體上限、共用內部網路、Loki / Alloy / Grafana 集中 log、自建總控台健康探測與共用 AI 服務</li></ul></div>
       </div>
     </section>
@@ -165,8 +171,13 @@
         <div><b>基礎設施</b><span>Docker Compose、Kubernetes、Helm、GCP、nginx、Cloudflare、Let's Encrypt、GitLab CI / Drone、Loki / Grafana / Prometheus、Tailscale</span></div>
         <div><b>前端 / App</b><span>React、Vue 3、Flutter、原生 HTML / CSS / JS；App Store / Google Play 上架</span></div>
         <div><b>整合</b><span>LINE Messaging API、Telegram Bot、Google Calendar / OAuth、OpenAI / Claude API、金流 Webhook、券商 API、ESC/POS / TSPL 印表機</span></div>
-        <div><b>資料分析</b><span>BigQuery、LookerStudio、Excel 進階函數與 VBA</span></div>
+        <div><b>資料分析</b><span>BigQuery、LookerStudio、Google Sheets；Excel（VLOOKUP / XLOOKUP / INDEX+MATCH / SUMIFS / COUNTIFS / IFS / IFERROR / 樞紐分析表 / 條件式格式 / 資料驗證 / VBA 巨集）</span></div>
       </div>
+    </section>
+
+    <section>
+      <h2>Summary (English)</h2>
+      <p class="summary">Backend engineer with five years of Go, across monitoring agents, online gaming and entertainment platforms, payment and P2P trading systems, and data-layer migrations. Bootstraps services from scratch, designs schemas and APIs, and fixes concurrency and stability issues (data races, resource leaks, SQL injection). Tuned queries on tens of millions of rows from 3 s to 50 ms. Also ships side projects that people actually use: a night-market drink POS on Raspberry Pi, a badminton court rotation SaaS, and a multi-league odds dashboard. Three years of technical support before engineering give a business and data perspective. Based in Taichung, open to remote.</p>
     </section>
 
     <section>
@@ -188,6 +199,15 @@
 <footer class="footer wrap">
   <span>© <span id="year"></span> 蔡宗霖 · relexes.com</span>
 </footer>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+(function () {
+  var toggle = document.getElementById('navToggle'), links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+})();
+</script>
 </body>
 </html>

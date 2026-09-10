@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=dev">
 </head>
 <body>
 <div class="bg-blobs" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -77,10 +77,10 @@
       <article class="card rise" data-cat="product">
         <figure class="card-img"><img src="assets/pos.jpg" alt="飲料 POS 點餐畫面" loading="lazy" width="880" height="495"></figure>
         <div class="card-top"><span class="badge live">上線中</span><span class="card-cat">POS · 硬體</span></div>
-        <h3>夜市飲料餐車 POS<small>iPad 點餐、樹莓派出單，斷網也能營業</small></h3>
+        <h3>夜市飲料餐車 POS<small>iPad 點餐、樹莓派出單，3 家攤商使用中</small></h3>
         <p class="card-sum">提供夜市飲料攤販使用的離線優先點餐系統。樹莓派自己發 WiFi 熱點，iPad 開瀏覽器就能點餐，出單機與貼紙機直接出票；有網路時自動把訂單同步到雲端。</p>
         <ul class="tags"><li>Go</li><li>SQLite</li><li>MySQL</li><li>Raspberry Pi</li><li>ESC/POS</li><li>TSPL</li></ul>
-        <button class="card-more" aria-expanded="false">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <button class="card-more" type="button">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
         <div class="card-detail"><div>
           <ul>
             <li>Go 單一執行檔交叉編譯到 ARM，樹莓派零依賴部署；前端純 HTML/JS 內嵌進 binary</li>
@@ -96,10 +96,10 @@
       <article class="card rise" data-cat="product">
         <figure class="card-img"><img src="assets/court.jpg" alt="羽球輪換系統排場畫面" loading="lazy" width="880" height="495"></figure>
         <div class="card-top"><span class="badge live">上線中</span><span class="card-cat">SaaS · 多租戶</span></div>
-        <h3>羽球輪換系統<small>iPad 拖曳排場，朋友的球隊每週在用</small></h3>
+        <h3>羽球輪換系統<small>iPad 拖曳排場，5 個球隊每週在用</small></h3>
         <p class="card-sum">給羽球團主用的輪換排場網頁：把球員拖到場地或等待順位，按「下場」整組自動補上。多裝置即時同步，一個 LINE bot 服務所有球隊的報名。</p>
         <ul class="tags"><li>Go</li><li>SQLite</li><li>SSE</li><li>Pointer Events</li><li>LINE Bot</li><li>Threads API</li></ul>
-        <button class="card-more" aria-expanded="false">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <button class="card-more" type="button">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
         <div class="card-detail"><div>
           <ul>
             <li>多租戶：每個球隊獨立帳密與月費制，試用 / 付費 / 停權由管理後台控制</li>
@@ -113,11 +113,12 @@
       </article>
 
       <article class="card rise" data-cat="product">
+        <figure class="card-img"><img src="assets/shiguang.jpg" alt="拾光 App" loading="lazy" width="880" height="495"></figure>
         <div class="card-top"><span class="badge run">運行中</span><span class="card-cat">App · AI</span></div>
         <h3>拾光 ShiGuang<small>台灣智慧失物招領 App</small></h3>
         <p class="card-sum">整合民間與官方資源的失物招領 App，用 AI 圖像辨識與特徵比對，自動媒合遺失物與拾獲物。iOS / Android 雙平台，含管理後台。</p>
         <ul class="tags"><li>Go</li><li>Flutter</li><li>PostgreSQL</li><li>PostGIS</li><li>pgvector</li><li>Python</li><li>React</li></ul>
-        <button class="card-more" aria-expanded="false">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <button class="card-more" type="button">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
         <div class="card-detail"><div>
           <ul>
             <li>後端 Handler → Service → Repository 分層；OTP / Google / Apple 登入、JWT、限流</li>
@@ -135,7 +136,7 @@
         <h3>多聯盟盤口與賽事系統<small>NBA / MLB / KBO，盤口異動推播與 AI 分析</small></h3>
         <p class="card-sum">定時掃描各聯盟盤口，異動時推播 LINE；Web Dashboard 提供賽程、比分、逐局、投注紀錄，並用 AI 做賽前分析、賽後復盤與週報。</p>
         <ul class="tags"><li>Go</li><li>PostgreSQL</li><li>Redis</li><li>React</li><li>LINE Bot</li><li>Claude</li></ul>
-        <button class="card-more" aria-expanded="false">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <button class="card-more" type="button">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
         <div class="card-detail"><div>
           <ul>
             <li>從單一 NBA 擴充到三個聯盟，各自的資料源、市場類型（獨贏 / 讓分 / 前五局）統一在同一套資料模型</li>
@@ -148,11 +149,12 @@
       </article>
 
       <article class="card rise" data-cat="data">
+        <figure class="card-img"><img src="assets/trader.jpg" alt="台指期自動交易系統示意圖" loading="lazy" width="880" height="495"></figure>
         <div class="card-top"><span class="badge run">模擬運行中</span><span class="card-cat">交易 · 即時</span></div>
         <h3>台指期自動交易系統<small>策略引擎、風控、回測與券商下單</small></h3>
         <p class="card-sum">小台（MXF）自動交易：Go 負責策略引擎、風控與 LINE 通知，Python 負責回測與券商 API 下單，React 前端用 WebSocket 看即時報價與部位。</p>
         <ul class="tags"><li>Go</li><li>Python</li><li>FastAPI</li><li>React</li><li>WebSocket</li><li>富邦 Neo SDK</li></ul>
-        <button class="card-more" aria-expanded="false">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <button class="card-more" type="button">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
         <div class="card-detail"><div>
           <ul>
             <li>日盤 / 夜盤時段排程、停損停利與出場路徑是回歸測試的重點，改策略必驗</li>
@@ -165,11 +167,12 @@
       </article>
 
       <article class="card rise" data-cat="data">
+        <figure class="card-img"><img src="assets/excel.jpg" alt="Excel 訂單整理示意圖" loading="lazy" width="880" height="495"></figure>
         <div class="card-top"><span class="badge live">上線中</span><span class="card-cat">工具 · 效能</span></div>
         <h3>Excel 訂單整理工具<small>手寫解析器，十萬列檔案秒級處理</small></h3>
         <p class="card-sum">上傳訂單 Excel，自動做品名正規化與數量彙總後輸出分頁。為了大檔效能，xlsx 與偽裝成 .xls 的 HTML 都是自己寫 byte scanner 解析。</p>
         <ul class="tags"><li>Go</li><li>xlsx</li><li>Claude</li><li>靜態 HTML</li></ul>
-        <button class="card-more" aria-expanded="false">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <button class="card-more" type="button">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
         <div class="card-detail"><div>
           <ul>
             <li>手寫 zip + XML byte scanner 取代標準 encoding/xml，並保留舊實作當基準做逐格等價測試</li>
@@ -181,11 +184,12 @@
       </article>
 
       <article class="card rise" data-cat="infra">
+        <figure class="card-img"><img src="assets/line.jpg" alt="LINE 生活助理對話示意圖" loading="lazy" width="880" height="495"></figure>
         <div class="card-top"><span class="badge live">上線中</span><span class="card-cat">Bot · 排程</span></div>
         <h3>LINE 生活助理 Bot<small>ChatGPT 意圖判斷、行事曆、每日推播</small></h3>
         <p class="card-sum">用自然語言新增或查詢 Google Calendar 行程，早上推天氣、行程、股票摘要，行程前 30 分鐘提醒；關鍵字先攔截再交給 ChatGPT 判斷意圖。</p>
         <ul class="tags"><li>Go</li><li>Gin</li><li>PostgreSQL</li><li>Redis</li><li>OpenAI</li><li>Google Calendar</li></ul>
-        <button class="card-more" aria-expanded="false">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <button class="card-more" type="button">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
         <div class="card-detail"><div>
           <ul>
             <li>Webhook 驗簽 → 事件分流 → 關鍵字攔截 → ChatGPT 意圖分類（新增 / 查詢 / 閒聊）</li>
@@ -197,11 +201,12 @@
       </article>
 
       <article class="card rise" data-cat="infra">
+        <figure class="card-img"><img src="assets/agent.jpg" alt="共用 AI 服務架構示意圖" loading="lazy" width="880" height="495"></figure>
         <div class="card-top"><span class="badge live">上線中</span><span class="card-cat">內部服務 · AI</span></div>
         <h3>共用 AI 服務<small>把 CLI 包成 HTTP，各專案共用同一份配額</small></h3>
         <p class="card-sum">多個專案都要用 AI，但配額只有一份。做一個內部服務把 Claude CLI 包成 HTTP API，管併發、排隊、記錄每次呼叫與用量，各專案透過共用網路呼叫。</p>
         <ul class="tags"><li>Go</li><li>SQLite</li><li>Docker network</li><li>併發控制</li></ul>
-        <button class="card-more" aria-expanded="false">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <button class="card-more" type="button">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
         <div class="card-detail"><div>
           <ul>
             <li>併發上限與記憶體上限綁在一起算：單次峰值 × 併發數要留在容器 mem_limit 內</li>
@@ -213,11 +218,12 @@
       </article>
 
       <article class="card rise" data-cat="infra">
+        <figure class="card-img"><img src="assets/console.jpg" alt="總控台服務狀態示意圖" loading="lazy" width="880" height="495"></figure>
         <div class="card-top"><span class="badge live">上線中</span><span class="card-cat">監控 · Log</span></div>
         <h3>總控台與集中式 Log<small>一頁看完所有服務的健康狀態與今日錯誤</small></h3>
         <p class="card-sum">十幾個服務跑在同一台 VM，需要一眼看出誰出事。Loki + Alloy + Grafana 集中收 log，再做一個總控台探測各服務健康、列出今日錯誤與事件時間軸。</p>
         <ul class="tags"><li>Go</li><li>Loki</li><li>Alloy</li><li>Grafana</li><li>LogQL</li><li>SQLite</li></ul>
-        <button class="card-more" aria-expanded="false">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <button class="card-more" type="button">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
         <div class="card-detail"><div>
           <ul>
             <li>探測一律打容器內部位址，連續失敗達門檻才算異常，避免單次逾時造成假警報</li>
@@ -272,8 +278,8 @@
       <p>五年 Go 後端，從技術客服一路走到獨立負責服務。完整版見<a href="resume.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">履歷頁</a>。</p>
     </div>
     <div class="timeline">
-      <div class="job now rise"><span class="job-when">2026/6 — 現在</span><div><h3>威智有限公司<small>Golang 後端工程師</small></h3><p>遊戲服務效能優化與遊戲商串接，處理約 400 萬筆規模的資料。</p></div></div>
-      <div class="job rise"><span class="job-when">2025/5 — 2026/5</span><div><h3>碼斯克科技探索有限公司<small>Golang 工程師 · 台中</small></h3><p>Go 微服務線上平台。獨立從零建立 P2P 媒合交易服務與平台管理後台服務，參與 17 個 repo；負責金流接入、代理提款、玩家活動、RabbitMQ 事件驅動重構、注單 MySQL → Elasticsearch 遷移，以及全系統 Health Check 與穩定性修復。</p></div></div>
+      <div class="job now rise"><span class="job-when">2026/6 — 現在</span><div><h3>威智有限公司<small>Golang 後端工程師</small></h3><p>優化既有專案整體架構（移除 submodule 依賴、重規劃索引）與遊戲商串接，處理約 400 萬筆規模的資料；團隊約 10 人。</p></div></div>
+      <div class="job rise"><span class="job-when">2025/5 — 2026/5</span><div><h3>碼斯克科技探索有限公司<small>Golang 工程師 · 台中</small></h3><p>Go 微服務線上平台。獨立從零建立 P2P 媒合交易服務與平台管理後台服務，參與 17 個 repo；負責金流接入、代理提款、玩家活動、RabbitMQ 事件驅動重構、注單 MySQL → Elasticsearch 遷移。千萬筆資料的效能優化：關鍵查詢 3 秒 → 50 毫秒。</p></div></div>
       <div class="job rise"><span class="job-when">2025/3 — 2025/5</span><div><h3>接案<small>後端工程師</small></h3><p>外包獎勵中心系統（簽到、代理邀請獎勵），用 RabbitMQ 與 Redis queue 處理大量資料，不阻塞主流程。</p></div></div>
       <div class="job rise"><span class="job-when">2024/4 — 2025/1</span><div><h3>杰思數位有限公司<small>Golang 工程師 · 台中</small></h3><p>聊天室彩票遊戲架構設計與開發：前台、後台、GameServer、下注與開獎結算、Redis PubSub + WebSocket 推播、排程、優惠與 VIP 返水模組、MySQL 查詢優化。</p></div></div>
       <div class="job rise"><span class="job-when">2023/6 — 2024/4</span><div><h3>精誠資訊<small>後端工程師 · 台北</small></h3><p>主機監控代理產品：復刻 blackbox scan、SNMP、NMAP 與 remote_write，資料回送 RabbitMQ / Prometheus / OpenSearch；可以 Docker 或系統服務形式部署到客戶端。</p></div></div>
@@ -317,11 +323,18 @@
   </section>
 </main>
 
+<dialog class="modal" id="modal" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <button class="modal-close" type="button" id="modalClose" aria-label="關閉">×</button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</dialog>
+
 <footer class="footer wrap">
   <span>© <span id="year"></span> 蔡宗霖 · relexes.com</span>
   <span>Go 單一 binary 內嵌靜態頁。</span>
 </footer>
 
-<script src="app.js"></script>
+<script src="app.js?v=dev"></script>
 </body>
 </html>
