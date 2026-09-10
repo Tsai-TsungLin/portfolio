@@ -20,6 +20,7 @@ func TestHandler(t *testing.T) {
 		{"樣式", http.MethodGet, "/style.css", http.StatusOK, "--bg"},
 		{"腳本", http.MethodGet, "/app.js", http.StatusOK, ""},
 		{"健康檢查", http.MethodGet, "/health", http.StatusOK, "ok"},
+		{"robots", http.MethodGet, "/robots.txt", http.StatusOK, "User-agent"},
 		{"不存在的路徑不 fallback 到首頁", http.MethodGet, "/nba/dashboard", http.StatusNotFound, ""},
 		{"不接受 POST", http.MethodPost, "/", http.StatusMethodNotAllowed, ""},
 	}
