@@ -36,20 +36,20 @@ sed -i '' 's|<span class="pdf-only"></span>|<span>0978-380-555</span>|' $OUT/res
 4. 部署後：`curl -s localhost:8094/health`、`docker ps`、看 log；**再到 lex-console 的 `services.yaml` 登記**，並更新 `../.claude/rules/infra.md` 的容器表
 5. nginx 切換見下一節；**切完每個受影響的網址都要實際開一次**
 
-## 網域整理（待執行，需先確認）
+## 網域整理（2026-09-10 已完成）
 
-目標：`relexes.com` 根網域給個人網站；原本掛在根網域底下的服務搬到子網域，比照 `court.relexes.com`。
+已切換：`relexes.com` 根網域給個人網站；原本掛在根網域底下的服務搬到子網域，比照 `court.relexes.com`。
 
 **使用者已指定不搬的路徑**：`/tools/`（excel-tools）、`/line/` 與 `/google/callback`（hermes，改網址要動 LINE 與 Google 後台，不值得）。`/proposal` 靜態頁也維持原樣。
 
-| 現在 | 之後 | 要動的地方 |
+| 切換前 | 切換後 | 動了什麼 |
 |---|---|---|
 | `relexes.com/` → scanNBA | `relexes.com/` → **portfolio** | nginx `location /` 改指 8094 |
-| `relexes.com/nba/` `/mlb/` `/kbo/` `/health` → scanNBA | `scan.relexes.com/nba/` …（子網域名稱可再改） | Cloudflare A 記錄（橘雲）、certbot 憑證、新 server block；**scanNBA 的 LINE webhook URL** 要在 LINE Developers 改成新網域；app 內部路徑不用改（仍是 `/nba/dashboard`） |
-| `relexes.com/trader/` `/ws` → taiex-trader | `trader.relexes.com/` | 同上；taiex 前端目前以 `/trader/` 為 base path 建置，要改成 `/` 重新 build 上傳；`/ws` 改為根路徑 |
+| `relexes.com/nba/` `/mlb/` `/kbo/` `/health` → scanNBA | `sports.relexes.com/nba/` … | Cloudflare A 記錄（橘雲）、certbot 憑證、新 server block；scanNBA 的 LINE Webhook URL 與 LIFF Endpoint 已在 LINE Developers 改到新網域，`config.yaml` 的 `base_url` 同步改；app 內部路徑不用改（仍是 `/nba/dashboard`） |
+| `relexes.com/trader/` `/ws` → taiex-trader | `trader.relexes.com/` | 同上；taiex 前端 base 從 `/trader/` 改為 `/` 重新 build 上傳，`/ws` 在根路徑 |
 | `/tools/`、`/line/`、`/google/callback`、`/proposal` | 不變 | 原 location 原樣保留在 `relexes.com` 區塊（見 `deploy/nginx-relexes.conf`） |
 
-切換順序（避免空窗）：
+當時的切換順序（避免空窗）：
 
 1. 先建好 `scan.` 與 `trader.` 兩個子網域（DNS → certbot → nginx），此時舊路徑仍在，兩邊並行可用
 2. 改 LINE Developers 的 scanNBA webhook 到新網域，確認推播正常
