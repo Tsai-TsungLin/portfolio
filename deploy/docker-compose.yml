@@ -1,0 +1,23 @@
+# relexes.com 個人網站。name 一定要設：各服務的 compose 都在自己的 deploy/ 底下，
+# 不設會全部叫 "deploy" 互相頂掉（見 ../../.claude/rules/infra.md）
+name: portfolio
+services:
+  app:
+    build: .
+    restart: always
+    # 純靜態頁，實測遠低於 32m；任何新容器都要設上限
+    mem_limit: 64m
+    memswap_limit: 128m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    ports:
+      - "127.0.0.1:8094:8080"   # 只綁 loopback，經 host nginx 對外；埠號登記在 infra.md
+    networks:
+      default:
+      lexnet:   # 讓總控台（lex-console）能探測 /health
+
+networks:
+  lexnet:
+    external: true

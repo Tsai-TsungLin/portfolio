@@ -1,0 +1,5 @@
+/portfolio
+/deploy/portfolio
+graphify-out/
+docs/adr/
+.DS_Store

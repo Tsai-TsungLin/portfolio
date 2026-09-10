@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>蔡宗霖 — 履歷</title>
+<meta name="description" content="蔡宗霖（Tsung-Lin Tsai）Golang 後端工程師履歷。台中，可遠端。">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23a4724b'/%3E%3Ctext x='16' y='21' font-size='15' text-anchor='middle' fill='%23f1e7db' font-family='Georgia'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-blobs" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="./"><i></i>relexes</a>
+    <nav class="nav-links" aria-label="主選單">
+      <a href="./#work">作品</a>
+      <a href="./#experience">經歷</a>
+      <a href="resume.html" class="active">履歷</a>
+    </nav>
+    <button class="btn" onclick="window.print()">列印 / 存成 PDF</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="resume">
+    <header>
+      <div>
+        <h1>蔡宗霖<small>Tsung-Lin Tsai</small></h1>
+        <p class="role">Golang 後端工程師 · 台中市 · 可遠端</p>
+      </div>
+      <div class="contact-list">
+        <a href="mailto:ss19960429ss@gmail.com">ss19960429ss@gmail.com</a>
+        <a href="https://github.com/Tsai-TsungLin">github.com/Tsai-TsungLin</a>
+        <a href="https://relexes.com">relexes.com</a>
+        <span class="pdf-only"></span>
+      </div>
+    </header>
+
+    <section>
+      <h2>摘要</h2>
+      <p class="summary">五年 Go 後端工程師，經歷監控代理產品、遊戲與線上娛樂平台微服務、金流與 P2P 交易、資料層遷移等領域，能獨立從零初始化服務、設計資料表與 API、處理併發與穩定性問題。同時以個人專案完成夜市飲料 POS、羽球輪換系統等實際上線且有人在用的產品，涵蓋前端、後端、硬體串接與部署維運。轉職前有三年技術客服與資料對帳經驗，習慣從業務與資料兩個視角看系統。</p>
+    </section>
+
+    <section>
+      <h2>工作經歷</h2>
+      <div class="entry">
+        <span class="when">2026/6 — 現在</span>
+        <div>
+          <h3>威智有限公司 <small>· Golang 後端工程師</small></h3>
+          <ul>
+            <li>遊戲服務效能優化與遊戲商串接，處理約 400 萬筆規模的資料</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <span class="when">2025/5 — 2026/5</span>
+        <div>
+          <h3>碼斯克科技探索有限公司 <small>· Golang 工程師 · 台中</small></h3>
+          <ul>
+            <li>Go 微服務架構線上平台，負責金流、P2P 交易、玩家活動、代理系統、三方接入與資料層遷移；參與 17 個 repo、個人 commit 300+</li>
+            <li>獨立從零建立 P2P 媒合交易服務：訂單配對、憑證上傳、過期機制、爭議申訴、回調與後台強制審核；修正 data race、Redis 訂單 ID 同步與併發取消問題</li>
+            <li>獨立初始化平台管理後台服務：多站點 DB 動態配置、快取管理、遊戲商停用總控、MinIO 憑證上傳，與 Vue 前端整合</li>
+            <li>從零接入 EXPAY 金流：充值、提款、C2C、Webhook 回調、加解密、敏感 log 管控、匯率預扣與取消退款</li>
+            <li>代理提款流程、福利中心（簽到、邀請獎勵、狀態機修正）；推動 RabbitMQ 事件驅動重構解耦通知與排程</li>
+            <li>注單資料 MySQL → Elasticsearch 遷移，建立跨服務帳變查詢中心；為 10+ 服務加上 HTTP / gRPC Health Check 支援 K8s Probe</li>
+            <li>穩定性修復：SQL Injection 防護、排序欄位白名單、sync.Once 初始化、DB Statement / Redis 連線 / goroutine 洩漏排查</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <span class="when">2025/3 — 2025/5</span>
+        <div>
+          <h3>接案 <small>· 後端工程師</small></h3>
+          <ul>
+            <li>外包獎勵中心系統（簽到、代理邀請獎勵），以 RabbitMQ 與 Redis queue 處理大量資料，不阻塞主流程</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <span class="when">2024/4 — 2025/1</span>
+        <div>
+          <h3>杰思數位有限公司 <small>· Golang 工程師 · 台中</small></h3>
+          <ul>
+            <li>設計聊天室彩票遊戲架構：前台、後台、GameServer；下注、開獎、結算派彩與漏單處理，需比外部訊源更早封盤</li>
+            <li>Redis PubSub + WebSocket 串接多代理聊天室推播；排程抓取開獎訊源、產生期號表、定時統計</li>
+            <li>優惠活動架構與審核流程、VIP 與返水模組、權限功能；資料表設計與 MySQL 查詢優化</li>
+            <li>Gin / Gin Swagger / GORM / MySQL / MongoDB / Redis / RabbitMQ / Docker / GitLab CI</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <span class="when">2023/6 — 2024/4</span>
+        <div>
+          <h3>精誠資訊股份有限公司 <small>· 後端工程師 · 台北</small></h3>
+          <ul>
+            <li>主機監控代理產品：復刻 blackbox scan、SNMP、NMAP 與 remote_write，結果回送 RabbitMQ / Prometheus / OpenSearch</li>
+            <li>RabbitMQ producer / consumer 套件、OpenSearch 模組、Splunk API 串接；可用 Docker 或系統服務形式部署到客戶端</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <span class="when">2022/5 — 2023/6</span>
+        <div>
+          <h3>艾爾加科技有限公司 <small>· 軟體工程師 · 台中</small></h3>
+          <ul>
+            <li>Go RESTful API、gRPC、NSQ、WebSocket 開發；以 Lua 設計遊戲；Telegram 告警與半自動化操作機器人</li>
+            <li>GCP 上建置維運 MySQL 與 Scylla：主從架構、partition / trigger、gh-ost、版本升級與備份；Grafana / Prometheus 監控</li>
+            <li>BigQuery 跨資料源整合並串接 LookerStudio 供風控評估；Excel VBA 自動化每日風控報表</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <span class="when">2019/5 — 2022/4</span>
+        <div>
+          <h3>技術客服 <small>· 睿隆科技、微碧愛普科技 · 台中</small></h3>
+          <ul>
+            <li>點餐 POS 系統與後台報表客戶支援、硬體維修、log 判讀與問題排除、建立 SOP</li>
+            <li>Excel VBA 自動化月結與營運報表，再自學 Python 將流程程式化，從資料處理跨進工程師領域</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>個人專案（皆已上線或運行中）</h2>
+      <div class="entry">
+        <span class="when">Go · SQLite · 樹莓派</span>
+        <div><h3>夜市飲料餐車 POS</h3><ul><li>iPad 瀏覽器點餐、樹莓派直驅出單機（ESC/POS）與貼紙機（TSPL），離線優先、斷電不掉單、有網路時同步雲端；雲端多分店報表、線上更新菜單、OTA 更新</li></ul></div>
+      </div>
+      <div class="entry">
+        <span class="when">Go · SSE · LINE Bot</span>
+        <div><h3>羽球輪換系統</h3><ul><li>iPad 拖曳排場、多裝置即時同步、觀戰 QR、LINE 群組報名；多租戶月費制與管理後台（登入鎖定、IP 黑名單、異動紀錄）</li></ul></div>
+      </div>
+      <div class="entry">
+        <span class="when">Go · PostgreSQL · React</span>
+        <div><h3>多聯盟盤口與賽事系統</h3><ul><li>NBA / MLB / KBO 盤口異動 LINE 推播、Dashboard、投注紀錄與 AI 分析復盤週報</li></ul></div>
+      </div>
+      <div class="entry">
+        <span class="when">Go · Python · React</span>
+        <div><h3>台指期自動交易系統</h3><ul><li>策略引擎與風控（Go）、回測與券商下單微服務（Python）、WebSocket 即時報價前端；目前模擬模式運行</li></ul></div>
+      </div>
+      <div class="entry">
+        <span class="when">Go · Flutter · pgvector</span>
+        <div><h3>拾光 — 智慧失物招領 App</h3><ul><li>AI 圖像特徵比對媒合、PostGIS 地理查詢、OTP / Google / Apple 登入、管理後台；完成 App Store 與 Google Play 上架流程</li></ul></div>
+      </div>
+      <div class="entry">
+        <span class="when">維運</span>
+        <div><h3>單機多服務基礎設施</h3><ul><li>一台 GCP VM 跑十幾個容器：Cloudflare + nginx + 每網域獨立憑證、容器記憶體上限、共用內部網路、Loki / Alloy / Grafana 集中 log、自建總控台健康探測與共用 AI 服務</li></ul></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>技能</h2>
+      <div class="skill-rows">
+        <div><b>語言</b><span>Go（主力）、Python、Lua、SQL、JavaScript / TypeScript、Dart</span></div>
+        <div><b>後端</b><span>Gin、gRPC / Protobuf、GORM、RESTful API、WebSocket / SSE、cron 排程、微服務分層、Health Check</span></div>
+        <div><b>資料庫</b><span>MySQL、PostgreSQL（PostGIS / pgvector）、SQLite、Redis、Elasticsearch、MongoDB、Scylla；Zero-downtime Migration、查詢優化</span></div>
+        <div><b>訊息佇列</b><span>RabbitMQ、NSQ、Redis Queue / PubSub；事件驅動重構、併發安全、資源洩漏排查</span></div>
+        <div><b>基礎設施</b><span>Docker Compose、Kubernetes、Helm、GCP、nginx、Cloudflare、Let's Encrypt、GitLab CI / Drone、Loki / Grafana / Prometheus、Tailscale</span></div>
+        <div><b>前端 / App</b><span>React、Vue 3、Flutter、原生 HTML / CSS / JS；App Store / Google Play 上架</span></div>
+        <div><b>整合</b><span>LINE Messaging API、Telegram Bot、Google Calendar / OAuth、OpenAI / Claude API、金流 Webhook、券商 API、ESC/POS / TSPL 印表機</span></div>
+        <div><b>資料分析</b><span>BigQuery、LookerStudio、Excel 進階函數與 VBA</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>學歷與其他</h2>
+      <div class="skill-rows">
+        <div><b>學歷</b><span>中國醫藥大學 運動醫學系（2015 — 2018）</span></div>
+        <div><b>語言</b><span>中文（母語）、台語（中等）、英文（可讀技術文件）</span></div>
+        <div><b>求職條件</b><span>全職；台中或遠端，偶爾實體會議可配合；錄取後一個月可上班</span></div>
+      </div>
+    </section>
+  </article>
+
+  <div class="resume-bar">
+    <p>網頁版不放電話與地址，需要完整聯絡方式請來信。</p>
+    <a class="btn" href="./">回首頁</a>
+  </div>
+</main>
+
+<footer class="footer wrap">
+  <span>© <span id="year"></span> 蔡宗霖 · relexes.com</span>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
