@@ -26,7 +26,7 @@ func Handler() http.Handler {
 	// css / js 的網址帶內容雜湊：改版後網址跟著變，Cloudflare 與瀏覽器的舊快取自然失效
 	ver := assetVersion(sub)
 	pages := map[string][]byte{}
-	for _, name := range []string{"index.html", "resume.html"} {
+	for _, name := range []string{"index.html", "resume.html", "architecture.html"} {
 		b, err := fs.ReadFile(sub, name)
 		if err != nil {
 			panic(err)

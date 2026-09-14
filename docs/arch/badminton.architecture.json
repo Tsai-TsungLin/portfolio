@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "羽球輪換系統",
+    "quality_profile": "showcase",
+    "visual_preset": "editorial",
+    "viewBox": [
+      1300,
+      670
+    ],
+    "views": [
+      {
+        "id": "court-ops",
+        "label": "場邊操作與同步",
+        "focus": [
+          "teamui",
+          "watch",
+          "edge",
+          "app",
+          "sqlite"
+        ],
+        "note": "操作頁寫入後，SSE 把新狀態推給同隊所有裝置與觀戰頁。"
+      },
+      {
+        "id": "signup",
+        "label": "LINE 報名",
+        "focus": [
+          "line",
+          "edge",
+          "app",
+          "sqlite"
+        ],
+        "note": "一個 bot 服務所有球隊，由群組 id 解析出所屬球隊。"
+      },
+      {
+        "id": "marketing",
+        "label": "AI 自動發文",
+        "focus": [
+          "app",
+          "agent",
+          "threads"
+        ],
+        "note": "文案由 AI 現生並自動驗證，再排程發到 Threads。"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "teamui",
+      "type": "frontend",
+      "label": "球隊操作頁",
+      "sublabel": "iPad 拖曳 · Pointer Events",
+      "pos": [
+        40,
+        120
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "watch",
+      "type": "frontend",
+      "label": "觀戰頁 / 大螢幕",
+      "sublabel": "掃 QR 免登入唯讀",
+      "pos": [
+        40,
+        320
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "admin",
+      "type": "frontend",
+      "label": "superadmin 後台",
+      "sublabel": "方案 · 付款 · IP 黑名單",
+      "pos": [
+        40,
+        520
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "line",
+      "type": "external",
+      "label": "LINE 群組",
+      "sublabel": "+1 / -1 報名 · 開團",
+      "pos": [
+        340,
+        60
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "edge",
+      "type": "security",
+      "label": "Cloudflare + nginx",
+      "sublabel": "court.relexes.com",
+      "pos": [
+        340,
+        320
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "app",
+      "type": "backend",
+      "label": "Go 單一 binary",
+      "sublabel": "內嵌 HTML/JS · SSE hub",
+      "pos": [
+        660,
+        320
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "sqlite",
+      "type": "database",
+      "label": "SQLite",
+      "sublabel": "WAL · 單一寫入連線",
+      "pos": [
+        660,
+        520
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "threads",
+      "type": "external",
+      "label": "Threads",
+      "sublabel": "排程發文 · token 自動續期",
+      "pos": [
+        980,
+        60
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "agent",
+      "type": "external",
+      "label": "claude-agent",
+      "sublabel": "共用 AI 服務",
+      "pos": [
+        980,
+        320
+      ],
+      "size": [
+        180,
+        66
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "GCP VM line-bot",
+      "wraps": [
+        "edge",
+        "app",
+        "sqlite",
+        "agent"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "ops",
+      "from": "teamui",
+      "to": "edge",
+      "label": "HTTPS + SSE",
+      "variant": "emphasis"
+    },
+    {
+      "id": "watch-in",
+      "from": "watch",
+      "to": "edge"
+    },
+    {
+      "id": "admin-in",
+      "from": "admin",
+      "to": "edge",
+      "label": "後台 API"
+    },
+    {
+      "id": "webhook",
+      "from": "line",
+      "to": "edge",
+      "label": "Webhook",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 34
+    },
+    {
+      "id": "proxy",
+      "from": "edge",
+      "to": "app",
+      "label": "反向代理 · 不緩衝",
+      "variant": "emphasis"
+    },
+    {
+      "id": "mutate",
+      "from": "app",
+      "to": "sqlite",
+      "label": "單一交易寫入",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 34
+    },
+    {
+      "id": "ai-copy",
+      "from": "app",
+      "to": "agent",
+      "label": "文案生成"
+    },
+    {
+      "id": "post",
+      "from": "app",
+      "to": "threads",
+      "label": "Graph API 發文",
+      "fromSide": "top",
+      "toSide": "left",
+      "via": [
+        [
+          755,
+          93
+        ]
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "輪換與並發",
+      "items": [
+        "站位操作一律檢查 version、存 undo 快照、執行、version+1，同一交易完成",
+        "slots 以 UNIQUE(session_id, sp_id) 保證一人只在一處",
+        "報名正取與候補在讀取時依 id 順序算出，單一寫入連線天然序列化，不需要鎖"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "多租戶與安全",
+      "items": [
+        "所有查詢以 session 的 team_id 過濾，不信任前端傳來的 team_id",
+        "Session cookie 不落地：HMAC 帶球隊專屬 salt，停權或強制登出只要換 salt",
+        "LINE 由群組 id 解析所屬球隊，一群只屬一隊，綁定碼一次性"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "AI 行銷自動化",
+      "items": [
+        "Threads 文案依 14 種情境現生，自動驗證字數、連結與近 10 篇相似度，不過就重生",
+        "AI 配額用完就等恢復再補，其他失敗才退回 30 篇靜態文案庫",
+        "首則回覆延後 3 小時才補，連結放那則，多拉一次曝光"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,376 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "scanNBA 多聯盟盤口系統",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1300,
+      670
+    ],
+    "views": [
+      {
+        "id": "request-path",
+        "label": "主要請求路徑",
+        "focus": [
+          "dashboard",
+          "edge",
+          "router",
+          "service",
+          "postgres"
+        ],
+        "note": "從瀏覽器經 Cloudflare 與 nginx 進到分層後端，最後落到 PostgreSQL。"
+      },
+      {
+        "id": "multi-league",
+        "label": "多聯盟抽象",
+        "focus": [
+          "league",
+          "router",
+          "service",
+          "redis"
+        ],
+        "note": "LeagueProfile 決定路由註冊、日期換算、市場與 Redis key prefix。"
+      },
+      {
+        "id": "scheduled",
+        "label": "排程與 AI",
+        "focus": [
+          "scheduler",
+          "service",
+          "sources",
+          "agent"
+        ],
+        "note": "每聯盟一組 cron 觸發爬取、盤口比對與 AI 分析。"
+      },
+      {
+        "id": "notify",
+        "label": "推播通道",
+        "focus": [
+          "scheduler",
+          "service",
+          "line",
+          "telegram"
+        ],
+        "note": "LINE 負責盤口異動與賽事推播，Telegram 只接 KBO 得分事件。"
+      }
+    ],
+    "visual_preset": "editorial"
+  },
+  "components": [
+    {
+      "id": "line",
+      "type": "external",
+      "label": "LINE Platform",
+      "sublabel": "Webhook + Messaging API",
+      "pos": [
+        40,
+        110
+      ],
+      "size": [
+        160,
+        66
+      ]
+    },
+    {
+      "id": "dashboard",
+      "type": "frontend",
+      "label": "Dashboard SPA",
+      "sublabel": "React + Vite",
+      "pos": [
+        40,
+        320
+      ],
+      "size": [
+        160,
+        66
+      ],
+      "tag": "/{league}/dashboard"
+    },
+    {
+      "id": "telegram",
+      "type": "external",
+      "label": "Telegram",
+      "sublabel": "KBO 得分監控",
+      "pos": [
+        40,
+        530
+      ],
+      "size": [
+        160,
+        66
+      ]
+    },
+    {
+      "id": "edge",
+      "type": "security",
+      "label": "Cloudflare + nginx",
+      "sublabel": "sports.relexes.com",
+      "pos": [
+        290,
+        320
+      ],
+      "size": [
+        170,
+        66
+      ],
+      "tag": "TLS Full (strict)"
+    },
+    {
+      "id": "league",
+      "type": "backend",
+      "label": "League Registry",
+      "sublabel": "LeagueProfile · nba / mlb / kbo",
+      "pos": [
+        540,
+        110
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "router",
+      "type": "backend",
+      "label": "Gin Router + Handler",
+      "sublabel": "/{league}/api/v1/*",
+      "pos": [
+        540,
+        320
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "scheduler",
+      "type": "backend",
+      "label": "Cron Scheduler",
+      "sublabel": "每聯盟一組 · 台灣時間",
+      "pos": [
+        540,
+        530
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "agent",
+      "type": "external",
+      "label": "claude-agent",
+      "sublabel": "共用 AI 服務",
+      "pos": [
+        800,
+        110
+      ],
+      "size": [
+        170,
+        66
+      ],
+      "tag": "lexnet"
+    },
+    {
+      "id": "service",
+      "type": "backend",
+      "label": "Service 層",
+      "sublabel": "odds / game / ai / bet / stats",
+      "pos": [
+        800,
+        320
+      ],
+      "size": [
+        170,
+        66
+      ]
+    },
+    {
+      "id": "sources",
+      "type": "external",
+      "label": "賽事 / 盤口資料源",
+      "sublabel": "ESPN · MLB statsapi · Naver",
+      "pos": [
+        800,
+        530
+      ],
+      "size": [
+        170,
+        66
+      ]
+    },
+    {
+      "id": "redis",
+      "type": "database",
+      "label": "Redis",
+      "sublabel": "{league}: prefix · 全 key 帶 TTL",
+      "pos": [
+        1060,
+        200
+      ],
+      "size": [
+        170,
+        66
+      ]
+    },
+    {
+      "id": "postgres",
+      "type": "database",
+      "label": "PostgreSQL",
+      "sublabel": "scannba · GORM",
+      "pos": [
+        1060,
+        430
+      ],
+      "size": [
+        170,
+        66
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "GCP VM line-bot (asia-east1-b)",
+      "wraps": [
+        "edge",
+        "league",
+        "router",
+        "scheduler",
+        "agent",
+        "service",
+        "redis",
+        "postgres"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "browser-in",
+      "from": "dashboard",
+      "to": "edge",
+      "label": "HTTPS",
+      "variant": "emphasis",
+      "labelDy": 24
+    },
+    {
+      "id": "webhook-in",
+      "from": "line",
+      "to": "edge",
+      "label": "Webhook"
+    },
+    {
+      "id": "proxy",
+      "from": "edge",
+      "to": "router",
+      "label": "反向代理",
+      "variant": "emphasis"
+    },
+    {
+      "id": "handler-to-service",
+      "from": "router",
+      "to": "service",
+      "variant": "emphasis"
+    },
+    {
+      "id": "persist",
+      "from": "service",
+      "to": "postgres",
+      "label": "Repository / GORM",
+      "variant": "emphasis"
+    },
+    {
+      "id": "cache",
+      "from": "service",
+      "to": "redis",
+      "label": "快取讀寫"
+    },
+    {
+      "id": "ai-call",
+      "from": "service",
+      "to": "agent",
+      "label": "HTTP · AI 分析"
+    },
+    {
+      "id": "crawl",
+      "from": "service",
+      "to": "sources",
+      "label": "HTTP 爬取",
+      "labelDy": 24
+    },
+    {
+      "id": "cron-trigger",
+      "from": "scheduler",
+      "to": "service",
+      "label": "定時觸發"
+    },
+    {
+      "id": "profile-routes",
+      "from": "league",
+      "to": "router",
+      "label": "註冊 enabled 聯盟",
+      "labelDy": 24
+    },
+    {
+      "id": "line-push",
+      "from": "service",
+      "to": "line",
+      "label": "盤口異動推播",
+      "variant": "dashed",
+      "fromSide": "left",
+      "toSide": "top",
+      "via": [
+        [
+          760,
+          353
+        ],
+        [
+          760,
+          60
+        ],
+        [
+          120,
+          60
+        ]
+      ]
+    },
+    {
+      "id": "tg-alert",
+      "from": "scheduler",
+      "to": "telegram",
+      "label": "得分事件",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "對外入口",
+      "items": [
+        "Cloudflare 橘雲代理，SSL 模式 Full (strict)",
+        "nginx 把 sports.relexes.com 整個 / 轉給服務",
+        "Dashboard 與 LINE webhook 共用同一入口"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "多聯盟抽象",
+      "items": [
+        "LeagueProfile 統一日期換算：NBA 落庫日期 = 台灣日期 −1",
+        "帶 league 欄位的表，唯一鍵皆為 (league, ...) 複合鍵",
+        "Redis key 由 profile 給 prefix，全部必須有 TTL"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "排程與 AI",
+      "items": [
+        "AI 分析走共用 claude-agent，併發上限 5 場",
+        "KBO 得分監控每分鐘掃進行中比賽，去重靠 Redis 旗標",
+        "資料保留天數由 retention config 控制，每日 06:00 清理"
+      ]
+    }
+  ]
+}

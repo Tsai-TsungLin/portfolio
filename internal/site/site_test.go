@@ -40,7 +40,7 @@ func TestHandler(t *testing.T) {
 
 func TestAssetVersionInjected(t *testing.T) {
 	h := Handler()
-	for _, path := range []string{"/", "/resume.html"} {
+	for _, path := range []string{"/", "/resume.html", "/architecture.html"} {
 		rec := httptest.NewRecorder()
 		h.ServeHTTP(rec, httptest.NewRequest(http.MethodGet, path, nil))
 		body := rec.Body.String()

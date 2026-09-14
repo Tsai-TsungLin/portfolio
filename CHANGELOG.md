@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-09-14 架構圖總覽與五個服務的互動式架構圖
+- 新增 `/architecture.html` 總覽，Architecture 區塊改連到總覽；各作品卡片細節直接連到自己的圖
+- 新增飲料 POS、拾光、羽球輪換（架構圖）與台指期（一筆進場的時序圖），規格在 `docs/arch/`
+
+## 2026-09-14 多聯盟系統互動式架構圖
+- 新增 `/arch/scannba.html`：可搜尋節點、追上下游、切 4 組導覽視角的單檔互動架構圖，由 archify 從 `docs/arch/scannba.architecture.json` 編譯
+- 入口兩處：Architecture 區塊的「實際案例」連結，以及多聯盟系統作品卡片細節裡的連結
+- 配色用 archify 的 editorial preset（底 #f2eee5）對齊站上奶茶色，標題縮短、viewBox 收到 670 以保住 legend
+- 圖檔自包含無外部資源（817KB），binary 從 9.13MB 增至 9.96MB
+
 ## 2026-09-10 部署 — 改版為左欄固定導覽
 - 版面改為左欄固定（名字、導覽、社群）＋右欄列表；左欄導覽跟著捲動高亮
 - 作品改為「縮圖 + 一段話 + 標籤」列表，分類篩選與細節 modal 保留

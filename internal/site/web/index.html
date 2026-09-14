@@ -58,7 +58,7 @@
     <p class="card-sum">提供夜市飲料攤販使用的離線優先點餐系統。樹莓派自己發 WiFi 熱點，iPad 開瀏覽器就能點餐，出單機與貼紙機直接出票；有網路時自動把訂單同步到雲端。</p>
     <ul class="tags"><li>Go</li><li>SQLite</li><li>MySQL</li><li>Raspberry Pi</li><li>ESC/POS</li><li>TSPL</li></ul>
     <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
-    <div class="card-detail"><ul><li>Go 單一執行檔交叉編譯到 ARM，樹莓派零依賴部署；前端純 HTML/JS 內嵌進 binary</li><li>直接寫 USB printer class 驅動 80mm 出單機（ESC/POS）與芯燁貼紙機（TSPL），免 CUPS</li><li>SQLite WAL 模式確保斷電不掉單；雲端報表依「地點 × 日期」檢視，支援多分店</li><li>線上更新菜單、即時看帳、OTA 更新；Tailscale 免公網 IP 遠端維運</li><li>雲端跑在 GCP VM 上的容器，只綁 loopback、設記憶體上限，經 nginx 與 Cloudflare 對外</li></ul><p class="card-role">角色：前端、後端、硬體串接、部署維運全包</p></div></div>
+    <div class="card-detail"><ul><li>Go 單一執行檔交叉編譯到 ARM，樹莓派零依賴部署；前端純 HTML/JS 內嵌進 binary</li><li>直接寫 USB printer class 驅動 80mm 出單機（ESC/POS）與芯燁貼紙機（TSPL），免 CUPS</li><li>SQLite WAL 模式確保斷電不掉單；雲端報表依「地點 × 日期」檢視，支援多分店</li><li>線上更新菜單、即時看帳、OTA 更新；Tailscale 免公網 IP 遠端維運</li><li>雲端跑在 GCP VM 上的容器，只綁 loopback、設記憶體上限，經 nginx 與 Cloudflare 對外</li></ul><p class="card-role">角色：前端、後端、硬體串接、部署維運全包 · <a href="arch/drinkpos.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">互動式架構圖 →</a></p></div></div>
   </article>
 
   <article class="row rise" data-cat="product">
@@ -67,7 +67,7 @@
     <p class="card-sum">給羽球團主用的輪換排場網頁：把球員拖到場地或等待順位，按「下場」整組自動補上。多裝置即時同步，一個 LINE bot 服務所有球隊的報名。</p>
     <ul class="tags"><li>Go</li><li>SQLite</li><li>SSE</li><li>Pointer Events</li><li>LINE Bot</li><li>Threads API</li></ul>
     <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
-    <div class="card-detail"><ul><li>多租戶：每個球隊獨立帳密與月費制，試用 / 付費 / 停權由管理後台控制</li><li>拖曳用 Pointer Events 自己寫，另備「點一下選取、再點目標」給觸控失靈時用；復原 10 步</li><li>SSE 讓多台裝置同步畫面；大螢幕投影頁與掃 QR 免登入觀戰頁</li><li>後台：登入失敗鎖定、IP 黑名單、異動紀錄、資料保留期自動清除</li><li>Threads 自動排程發文推廣、貼文洞察、新回覆推 Telegram，token 自動續期</li></ul><p class="card-role">角色：產品設計、前後端、後台、上線與營運</p></div></div>
+    <div class="card-detail"><ul><li>多租戶：每個球隊獨立帳密與月費制，試用 / 付費 / 停權由管理後台控制</li><li>拖曳用 Pointer Events 自己寫，另備「點一下選取、再點目標」給觸控失靈時用；復原 10 步</li><li>SSE 讓多台裝置同步畫面；大螢幕投影頁與掃 QR 免登入觀戰頁</li><li>後台：登入失敗鎖定、IP 黑名單、異動紀錄、資料保留期自動清除</li><li>Threads 自動排程發文推廣、貼文洞察、新回覆推 Telegram，token 自動續期</li></ul><p class="card-role">角色：產品設計、前後端、後台、上線與營運 · <a href="arch/badminton.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">互動式架構圖 →</a></p></div></div>
   </article>
 
   <article class="row rise" data-cat="product">
@@ -76,7 +76,7 @@
     <p class="card-sum">整合民間與官方資源的失物招領 App，用 AI 圖像辨識與特徵比對，自動媒合遺失物與拾獲物。iOS / Android 雙平台，含管理後台。</p>
     <ul class="tags"><li>Go</li><li>Flutter</li><li>PostgreSQL</li><li>PostGIS</li><li>pgvector</li><li>Python</li><li>React</li></ul>
     <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
-    <div class="card-detail"><ul><li>後端 Handler → Service → Repository 分層；OTP / Google / Apple 登入、JWT、限流</li><li>Python AI 微服務做圖像特徵向量，pgvector 相似度比對、PostGIS 地理範圍查詢</li><li>MinIO 物件儲存、Redis、Firebase 推播；Docker Compose 部署到 GCP VM</li><li>走過 App Store / Google Play 上架與審查流程（測試帳號、封閉測試、簽章指紋）</li></ul><p class="card-role">角色：後端、Flutter App、管理後台、上架流程</p></div></div>
+    <div class="card-detail"><ul><li>後端 Handler → Service → Repository 分層；OTP / Google / Apple 登入、JWT、限流</li><li>Python AI 微服務做圖像特徵向量，pgvector 相似度比對、PostGIS 地理範圍查詢</li><li>MinIO 物件儲存、Redis、Firebase 推播；Docker Compose 部署到 GCP VM</li><li>走過 App Store / Google Play 上架與審查流程（測試帳號、封閉測試、簽章指紋）</li></ul><p class="card-role">角色：後端、Flutter App、管理後台、上架流程 · <a href="arch/shiguang.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">互動式架構圖 →</a></p></div></div>
   </article>
 
   <article class="row rise" data-cat="data">
@@ -85,7 +85,7 @@
     <p class="card-sum">定時掃描各聯盟盤口，異動時推播 LINE；Web Dashboard 提供賽程、比分、逐局、投注紀錄，並用 AI 做賽前分析、賽後復盤與週報。</p>
     <ul class="tags"><li>Go</li><li>PostgreSQL</li><li>Redis</li><li>React</li><li>LINE Bot</li><li>Claude</li></ul>
     <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
-    <div class="card-detail"><ul><li>從單一 NBA 擴充到三個聯盟，各自的資料源、市場類型（獨贏 / 讓分 / 前五局）統一在同一套資料模型</li><li>排程掃描外部 API，Redis 去重避免重複推播；台灣時區與美國賽日的日期偏移處理</li><li>AI 分析走自建的共用 AI 服務，容器內不裝 CLI，記憶體上限壓在 256MB</li><li>React 前端與另一個交易系統共用自建元件庫，本機建置後上傳，VM 不跑 node</li></ul><p class="card-role">角色：後端、前端、排程、部署</p></div></div>
+    <div class="card-detail"><ul><li>從單一 NBA 擴充到三個聯盟，各自的資料源、市場類型（獨贏 / 讓分 / 前五局）統一在同一套資料模型</li><li>排程掃描外部 API，Redis 去重避免重複推播；台灣時區與美國賽日的日期偏移處理</li><li>AI 分析走自建的共用 AI 服務，容器內不裝 CLI，記憶體上限壓在 256MB</li><li>React 前端與另一個交易系統共用自建元件庫，本機建置後上傳，VM 不跑 node</li></ul><p class="card-role">角色：後端、前端、排程、部署 · <a href="arch/scannba.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">互動式架構圖 →</a></p></div></div>
   </article>
 
   <article class="row rise" data-cat="data">
@@ -94,7 +94,7 @@
     <p class="card-sum">小台（MXF）自動交易：Go 負責策略引擎、風控與 LINE 通知，Python 負責回測與券商 API 下單，React 前端用 WebSocket 看即時報價與部位。</p>
     <ul class="tags"><li>Go</li><li>Python</li><li>FastAPI</li><li>React</li><li>WebSocket</li><li>富邦 Neo SDK</li></ul>
     <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
-    <div class="card-detail"><ul><li>日盤 / 夜盤時段排程、停損停利與出場路徑是回歸測試的重點，改策略必驗</li><li>下單拆成獨立 Python 微服務隔離券商 SDK，主服務不因 SDK 連線時序問題掛掉</li><li>backtesting.py 回測模組驗證策略；週報依「週日到週六」自動彙整</li><li>目前以模擬模式在 VM 上運行，不送實單</li></ul><p class="card-role">角色：架構、策略引擎、前後端、部署</p></div></div>
+    <div class="card-detail"><ul><li>日盤 / 夜盤時段排程、停損停利與出場路徑是回歸測試的重點，改策略必驗</li><li>下單拆成獨立 Python 微服務隔離券商 SDK，主服務不因 SDK 連線時序問題掛掉</li><li>backtesting.py 回測模組驗證策略；週報依「週日到週六」自動彙整</li><li>目前以模擬模式在 VM 上運行，不送實單</li></ul><p class="card-role">角色：架構、策略引擎、前後端、部署 · <a href="arch/taiex.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">互動式架構圖 →</a></p></div></div>
   </article>
 
   <article class="row rise" data-cat="data">
@@ -138,7 +138,7 @@
 
 <section class="sec" id="infra">
   <div class="sec-head"><h2>Architecture</h2></div>
-  <p class="sec-lead rise">所有服務都走同一條路：邊緣防護、閘道、服務、資料。每一層只做自己的事，出問題時也知道該看哪一層。</p>
+  <p class="sec-lead rise">所有服務都走同一條路：邊緣防護、閘道、服務、資料。每一層只做自己的事，出問題時也知道該看哪一層。各服務的實際架構見<a href="architecture.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">架構圖總覽</a>。</p>
   <div class="diagram rise">
     <div class="tier"><span class="tier-label">Edge</span><div class="nodes"><span class="node hl">Cloudflare</span><span class="node">DNS、TLS 終結、Bot 防護、快取</span></div></div><div class="tier-arrow">↓</div>
     <div class="tier"><span class="tier-label">Gateway</span><div class="nodes"><span class="node hl">nginx</span><span class="node">依網域分流</span><span class="node">Let's Encrypt 憑證</span><span class="node">WebSocket / SSE 轉發</span></div></div><div class="tier-arrow">↓</div>

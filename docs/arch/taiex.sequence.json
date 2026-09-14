@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "台指期自動交易 · 一筆進場",
+    "quality_profile": "showcase",
+    "visual_preset": "editorial",
+    "column_fit": "spread",
+    "viewBox": [
+      1080,
+      560
+    ],
+    "views": [
+      {
+        "id": "gate",
+        "label": "訊號與風控",
+        "focus": [
+          "cron",
+          "engine",
+          "risk",
+          "db"
+        ],
+        "note": "每分鐘評估策略，風控不通過就記 SKIP 結束。"
+      },
+      {
+        "id": "order",
+        "label": "下單",
+        "focus": [
+          "engine",
+          "trader",
+          "broker",
+          "db"
+        ],
+        "note": "券商 SDK 隔離在獨立的 Python 服務，Go 端以 goroutine 非同步呼叫。"
+      },
+      {
+        "id": "fill",
+        "label": "成交回報",
+        "focus": [
+          "trader",
+          "broker",
+          "engine",
+          "db"
+        ],
+        "note": "成交以 callback 回報，實際成交價回填後平移停損停利。"
+      }
+    ]
+  },
+  "participants": [
+    {
+      "id": "cron",
+      "type": "backend",
+      "label": "cron",
+      "sublabel": "每分鐘 Tick"
+    },
+    {
+      "id": "engine",
+      "type": "backend",
+      "label": "策略引擎",
+      "sublabel": "Go"
+    },
+    {
+      "id": "risk",
+      "type": "security",
+      "label": "風控",
+      "sublabel": "CanOpenPosition"
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "PostgreSQL",
+      "sublabel": "trades"
+    },
+    {
+      "id": "trader",
+      "type": "backend",
+      "label": "trader-service",
+      "sublabel": "Python FastAPI"
+    },
+    {
+      "id": "broker",
+      "type": "external",
+      "label": "富邦 Neo SDK",
+      "sublabel": "券商 / 交易所"
+    }
+  ],
+  "segments": [
+    {
+      "from": 160,
+      "to": 262,
+      "label": "訊號與風控"
+    },
+    {
+      "from": 276,
+      "to": 378,
+      "label": "下單"
+    },
+    {
+      "from": 390,
+      "to": 490,
+      "label": "成交回報"
+    }
+  ],
+  "messages": [
+    {
+      "from": "cron",
+      "to": "engine",
+      "y": 176,
+      "label": "Tick · 評估策略",
+      "variant": "emphasis"
+    },
+    {
+      "from": "engine",
+      "to": "risk",
+      "y": 212,
+      "label": "CanOpenPosition（拒絕記 SKIP）",
+      "variant": "emphasis"
+    },
+    {
+      "from": "engine",
+      "to": "db",
+      "y": 248,
+      "label": "寫入 PENDING_ENTRY",
+      "variant": "emphasis"
+    },
+    {
+      "from": "engine",
+      "to": "trader",
+      "y": 290,
+      "label": "POST /order/enter（goroutine）",
+      "variant": "emphasis"
+    },
+    {
+      "from": "trader",
+      "to": "broker",
+      "y": 326,
+      "label": "侵略性限價 ROD",
+      "variant": "emphasis"
+    },
+    {
+      "from": "broker",
+      "to": "trader",
+      "y": 362,
+      "label": "order_no",
+      "variant": "return"
+    },
+    {
+      "from": "broker",
+      "to": "trader",
+      "y": 400,
+      "label": "on_filled callback",
+      "variant": "return"
+    },
+    {
+      "from": "trader",
+      "to": "engine",
+      "y": 436,
+      "label": "POST /internal/fills",
+      "variant": "emphasis"
+    },
+    {
+      "from": "engine",
+      "to": "db",
+      "y": 472,
+      "label": "回填成交價 · 平移 SL/TP",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "進出場不對稱",
+      "items": [
+        "進場用侵略性限價，逾時改 RangeMarket 追單，偏離過大就放棄",
+        "出場直接送市價單，失敗重試 3 次才回滾為 OPEN",
+        "出場連續失敗 3 次自動觸發 kill switch，停掉後續實單"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "兩層防實單",
+      "items": [
+        "Go 端 trader.enabled 關閉時 client 直接是 nil，連 HTTP 都不打",
+        "Python 端 dry_run 在送單第一行短路，SDK 完全不會被呼叫",
+        "目前以模擬模式運行，任一層擋下都不會出真單"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "成交與冪等",
+      "items": [
+        "成交以 callback 為主，背景輪詢當備援防回報掉包",
+        "委託帶 user_def（E / X + trade id），已處理的成交 id 去重",
+        "送單當下標記 pending，防止同一個 tick 重複進場"
+      ]
+    }
+  ]
+}

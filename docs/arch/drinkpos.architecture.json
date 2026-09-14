@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "夜市飲料餐車 POS",
+    "quality_profile": "showcase",
+    "visual_preset": "editorial",
+    "viewBox": [
+      1340,
+      670
+    ],
+    "views": [
+      {
+        "id": "offline",
+        "label": "離線可走的路徑",
+        "focus": [
+          "ipad",
+          "pi",
+          "sqlite",
+          "escpos",
+          "tspl"
+        ],
+        "note": "斷網時這五個節點構成完整的點餐、落單與列印流程。"
+      },
+      {
+        "id": "sync",
+        "label": "復網後的同步",
+        "focus": [
+          "pi",
+          "edge",
+          "cloud",
+          "mysql"
+        ],
+        "note": "樹莓派單向主動發起，雲端從不主動連攤位。"
+      },
+      {
+        "id": "print",
+        "label": "兩套列印協定",
+        "focus": [
+          "pi",
+          "escpos",
+          "tspl"
+        ],
+        "note": "出單機與貼紙機用不同協定，中文處理方式也不同。"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "ipad",
+      "type": "frontend",
+      "label": "iPad / 手機瀏覽器",
+      "sublabel": "點餐與設定精靈網頁",
+      "pos": [
+        40,
+        330
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "sqlite",
+      "type": "database",
+      "label": "攤位 SQLite",
+      "sublabel": "WAL · 單寫入連線",
+      "pos": [
+        280,
+        140
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "pi",
+      "type": "backend",
+      "label": "樹莓派 drink-pos",
+      "sublabel": "Go 單一 binary · systemd :80",
+      "pos": [
+        280,
+        330
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "escpos",
+      "type": "external",
+      "label": "出單機",
+      "sublabel": "ESC/POS · USB · 收據",
+      "pos": [
+        220,
+        530
+      ],
+      "size": [
+        170,
+        66
+      ]
+    },
+    {
+      "id": "tspl",
+      "type": "external",
+      "label": "貼紙機",
+      "sublabel": "TSPL · USB · 杯貼",
+      "pos": [
+        420,
+        530
+      ],
+      "size": [
+        170,
+        66
+      ]
+    },
+    {
+      "id": "edge",
+      "type": "security",
+      "label": "Cloudflare + nginx",
+      "sublabel": "pos.relexes.com",
+      "pos": [
+        640,
+        330
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "admin",
+      "type": "frontend",
+      "label": "管理後台 / 報表",
+      "sublabel": "帳密 session cookie",
+      "pos": [
+        640,
+        140
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "cloud",
+      "type": "cloud",
+      "label": "drink-pos-cloud",
+      "sublabel": "收單去重 · 選單 · OTA",
+      "pos": [
+        890,
+        330
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "mysql",
+      "type": "database",
+      "label": "雲端 MySQL",
+      "sublabel": "orders / events / stalls",
+      "pos": [
+        1130,
+        330
+      ],
+      "size": [
+        170,
+        66
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "樹莓派（每攤一台）",
+      "wraps": [
+        "sqlite",
+        "pi",
+        "escpos",
+        "tspl"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "GCP VM line-bot",
+      "wraps": [
+        "edge",
+        "cloud",
+        "mysql"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "order-in",
+      "from": "ipad",
+      "to": "pi",
+      "label": "HTTP · 樹莓派自發 AP",
+      "variant": "emphasis",
+      "labelDy": 64
+    },
+    {
+      "id": "persist",
+      "from": "pi",
+      "to": "sqlite",
+      "label": "交易寫入後才列印",
+      "variant": "emphasis"
+    },
+    {
+      "id": "receipt",
+      "from": "pi",
+      "to": "escpos",
+      "label": "raw bytes",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "label-print",
+      "from": "pi",
+      "to": "tspl",
+      "label": "文字轉點陣圖",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "sync",
+      "from": "pi",
+      "to": "edge",
+      "label": "HTTPS · 每 60 秒主動同步",
+      "variant": "emphasis"
+    },
+    {
+      "id": "proxy",
+      "from": "edge",
+      "to": "cloud",
+      "label": "反向代理",
+      "variant": "emphasis"
+    },
+    {
+      "id": "store",
+      "from": "cloud",
+      "to": "mysql",
+      "label": "INSERT IGNORE 去重",
+      "variant": "emphasis",
+      "labelDy": 64
+    },
+    {
+      "id": "admin-in",
+      "from": "admin",
+      "to": "edge",
+      "label": "報表 / 選單維護",
+      "labelDy": 60
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "離線優先",
+      "items": [
+        "點餐 → 存 SQLite → 列印，全程不依賴外部網路",
+        "斷網時訂單在本地佇列累積不丟棄，復網後指數退避補送",
+        "樹莓派無 RTC 時鐘會倒退，單號改用接續上一筆 +1 而非數當日筆數"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "兩套列印協定",
+      "items": [
+        "出單機用機器內建中文字型，貼紙機改送點陣圖，不依賴字型",
+        "usblp 走 syscall 而非 os.File：netpoller 會讓 write 回報成功卻沒吐紙",
+        "在線探測只用 os.Stat 不開啟裝置，usblp 同時只允許一個開啟者"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "同步、去重與 OTA",
+      "items": [
+        "單一 POST /v1/sync 同時送訂單、事件與心跳，沒新資料也照打",
+        "訂單 uuid 用 crypto/rand 128-bit，雲端靠 UNIQUE 加 INSERT IGNORE 去重",
+        "OTA 驗 SHA256 後只在非營業時段換檔重啟，遠端維運走 Tailscale"
+      ]
+    }
+  ]
+}

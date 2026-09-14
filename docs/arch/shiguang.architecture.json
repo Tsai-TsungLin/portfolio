@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "拾光 ShiGuang",
+    "quality_profile": "showcase",
+    "visual_preset": "editorial",
+    "viewBox": [
+      1300,
+      670
+    ],
+    "views": [
+      {
+        "id": "match",
+        "label": "圖像媒合路徑",
+        "focus": [
+          "app",
+          "backend",
+          "minio",
+          "ai",
+          "pg"
+        ],
+        "note": "上傳圖片後由背景 goroutine 取特徵向量，比對在 PostgreSQL 內完成。"
+      },
+      {
+        "id": "identity",
+        "label": "登入與身分",
+        "focus": [
+          "app",
+          "oauth",
+          "edge",
+          "backend",
+          "redis"
+        ],
+        "note": "第三方登入取得 ID token，後端驗證後發自家 token，白名單放 Redis。"
+      },
+      {
+        "id": "admin-path",
+        "label": "管理後台",
+        "focus": [
+          "admin",
+          "edge",
+          "backend",
+          "pg"
+        ],
+        "note": "後台與 App 共用同一支後端，地區限制在邊緣層完成。"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "oauth",
+      "type": "external",
+      "label": "Google / Apple",
+      "sublabel": "OAuth · ID token",
+      "pos": [
+        40,
+        60
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "app",
+      "type": "frontend",
+      "label": "Flutter App",
+      "sublabel": "iOS / Android · Riverpod",
+      "pos": [
+        40,
+        290
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "admin",
+      "type": "frontend",
+      "label": "管理後台",
+      "sublabel": "React + Refine · /admin",
+      "pos": [
+        40,
+        520
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "edge",
+      "type": "security",
+      "label": "Cloudflare + nginx",
+      "sublabel": "shiguang.relexes.com",
+      "pos": [
+        300,
+        290
+      ],
+      "size": [
+        170,
+        66
+      ]
+    },
+    {
+      "id": "ai",
+      "type": "backend",
+      "label": "AI Service",
+      "sublabel": "FastAPI · CLIP / EasyOCR",
+      "pos": [
+        960,
+        520
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "backend",
+      "type": "backend",
+      "label": "Go Backend",
+      "sublabel": "Gin API + WebSocket",
+      "pos": [
+        620,
+        290
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "minio",
+      "type": "cloud",
+      "label": "MinIO",
+      "sublabel": "S3 相容物件儲存",
+      "pos": [
+        620,
+        520
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "redis",
+      "type": "database",
+      "label": "Redis",
+      "sublabel": "DB=2 · 限流與白名單",
+      "pos": [
+        620,
+        60
+      ],
+      "size": [
+        170,
+        66
+      ]
+    },
+    {
+      "id": "pg",
+      "type": "database",
+      "label": "PostgreSQL",
+      "sublabel": "PostGIS + pgvector",
+      "pos": [
+        960,
+        290
+      ],
+      "size": [
+        170,
+        66
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "GCP VM line-bot · docker compose",
+      "wraps": [
+        "edge",
+        "ai",
+        "backend",
+        "minio",
+        "redis",
+        "pg"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "app-in",
+      "from": "app",
+      "to": "edge",
+      "label": "HTTPS REST · wss",
+      "variant": "emphasis",
+      "labelDy": -60
+    },
+    {
+      "id": "admin-in",
+      "from": "admin",
+      "to": "edge",
+      "label": "管理 API"
+    },
+    {
+      "id": "id-token",
+      "from": "app",
+      "to": "oauth",
+      "label": "取 ID token",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "proxy",
+      "from": "edge",
+      "to": "backend",
+      "label": "反向代理",
+      "variant": "emphasis"
+    },
+    {
+      "id": "persist",
+      "from": "backend",
+      "to": "pg",
+      "label": "讀寫 · 向量比對",
+      "variant": "emphasis"
+    },
+    {
+      "id": "cache",
+      "from": "backend",
+      "to": "redis",
+      "label": "限流 · token 白名單",
+      "labelDy": -60,
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "object",
+      "from": "backend",
+      "to": "minio",
+      "label": "presigned URL 簽發",
+      "labelDy": 60,
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "ai-call",
+      "from": "backend",
+      "to": "ai",
+      "label": "背景 goroutine 觸發",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "圖像媒合",
+      "items": [
+        "背景 goroutine 取特徵向量，不擋 API 回應",
+        "pgvector cosine 距離比對遺失 ↔ 拾獲",
+        "AI Service 需 2GB，生產刻意不啟用，後端降級運作"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "身分與權限",
+      "items": [
+        "後台僅限台灣，靠 Cloudflare 的 CF-IPCountry 判斷",
+        "後台 dist 打包進後端 image，不另開容器",
+        "Google / Apple 登入由後端驗 ID token；推播走 FCM"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "資料保存",
+      "items": [
+        "Redis 共用容器，本服務用 DB=2 隔離",
+        "帳號刪除滿 7 天才匿名化，期間登入可取消",
+        "刪除紀錄只存 HMAC-SHA256 雜湊，不含個資"
+      ]
+    }
+  ]
+}

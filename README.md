@@ -6,6 +6,8 @@
 |---|---|
 | `/` | 作品、架構、技能、經歷、關於、聯絡 |
 | `/resume.html` | 履歷（網頁版不放電話與地址） |
+| `/architecture.html` | 架構圖總覽，列出有架構圖的服務 |
+| `/arch/*.html` | 各服務互動式架構圖：scannba / drinkpos / shiguang / badminton / taiex（archify 產生，勿手改） |
 | `/health` | 探測用，回 `ok` |
 
 ## 本機開發
