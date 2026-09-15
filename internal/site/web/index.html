@@ -46,7 +46,7 @@
 <main class="content">
 
 <section class="sec" id="work">
-  <div class="sec-head"><h2>Work <b>· 9 個專案</b></h2>
+  <div class="sec-head"><h2>Work <b>· 10 個專案</b></h2>
     <div class="chips" id="chips" role="group" aria-label="作品分類"><button class="chip" aria-pressed="true" data-filter="all">全部</button><button class="chip" aria-pressed="false" data-filter="product">商業產品</button><button class="chip" aria-pressed="false" data-filter="data">資料與交易</button><button class="chip" aria-pressed="false" data-filter="infra">自動化與基礎設施</button></div>
   </div>
   <p class="sec-lead rise">全部都是自己從需求、設計、開發到部署維運完成的專案。點「細節」看做了哪些事。</p>
@@ -131,6 +131,15 @@
     <ul class="tags"><li>Go</li><li>Loki</li><li>Alloy</li><li>Grafana</li><li>LogQL</li><li>SQLite</li></ul>
     <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
     <div class="card-detail"><ul><li>探測一律打容器內部位址，連續失敗達門檻才算異常，避免單次逾時造成假警報</li><li>Loki 查詢加 5 分鐘快取；level 標籤大小寫混雜要不分大小寫比對</li><li>自己收 log 的 collector 唯讀掛 docker.sock，收哪些容器寫死在程式裡，不接受外部輸入</li><li>與 Loki 並行收集比對筆數一週，一致才切換，切換過程不能有 log 空窗</li></ul><p class="card-role">角色：監控架構、後端、維運</p></div></div>
+  </article>
+
+  <article class="row rise" data-cat="infra">
+    <figure class="card-img"><picture><source srcset="assets/trip.webp" type="image/webp"><img src="assets/trip.jpg" alt="旅遊行程同步網頁每日行程畫面" width="880" height="495" loading="lazy"></picture></figure>
+    <div><span class="card-cat">同步 · Notion</span><h3>Notion 旅遊行程同步網頁 <span class="badge live">上線中</span><small>在 Notion 排行程，網頁與 Notion 雙向即時同步</small></h3>
+    <p class="card-sum">旅遊行程習慣寫在 Notion，但要給家人看或出門查很不方便。做成網頁：在後台貼上 Notion 頁面就產生唯讀與編輯連結，網頁改時間、排序、勾待辦與行李會寫回 Notion，Notion 改了網頁也會跟著更新。</p>
+    <ul class="tags"><li>Go</li><li>Notion API</li><li>SQLite</li><li>SSE</li><li>Pointer Events</li></ul>
+    <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
+    <div class="card-detail"><ul><li>快照 stale-while-revalidate：開頁立即回應，背景向 Notion 同步，有變更以 SSE 推給所有開著的人</li><li>Notion API 每秒 3 次限流：client 端 token bucket、429 與暫時性錯誤退避重試，行程內文點開才抓並依 last_edited_time 快取</li><li>Notion 圖片網址一小時過期：串流存到磁碟快取，容器記憶體 64MB 內不解碼不縮圖，host 白名單防 SSRF</li><li>唯讀 / 編輯連結即權限，寫入限流、CSP、nginx 只放行 Cloudflare 來源並取真實 IP</li><li>手機優先：拖曳排序、bottom sheet 編輯、地圖先顯示預覽圖再背景載入，首屏 LCP 從 4.7 秒降到 1.7 秒</li></ul><p class="card-role">角色：需求、前後端、Notion 資料模型、部署維運</p></div></div>
   </article>
 
   </div>
