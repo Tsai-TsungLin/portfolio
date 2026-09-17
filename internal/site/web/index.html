@@ -139,7 +139,7 @@
     <p class="card-sum">旅遊行程習慣寫在 Notion，但要給家人看或出門查很不方便。做成網頁：在後台貼上 Notion 頁面就產生唯讀與編輯連結，網頁改時間、排序、勾待辦與行李會寫回 Notion，Notion 改了網頁也會跟著更新。</p>
     <ul class="tags"><li>Go</li><li>Notion API</li><li>SQLite</li><li>SSE</li><li>Pointer Events</li></ul>
     <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
-    <div class="card-detail"><ul><li>快照 stale-while-revalidate：開頁立即回應，背景向 Notion 同步，有變更以 SSE 推給所有開著的人</li><li>Notion API 每秒 3 次限流：client 端 token bucket、429 與暫時性錯誤退避重試，行程內文點開才抓並依 last_edited_time 快取</li><li>Notion 圖片網址一小時過期：串流存到磁碟快取，容器記憶體 64MB 內不解碼不縮圖，host 白名單防 SSRF</li><li>唯讀 / 編輯連結即權限，寫入限流、CSP、nginx 只放行 Cloudflare 來源並取真實 IP</li><li>手機優先：拖曳排序、bottom sheet 編輯、地圖先顯示預覽圖再背景載入，首屏 LCP 從 4.7 秒降到 1.7 秒</li></ul><p class="card-role">角色：需求、前後端、Notion 資料模型、部署維運</p></div></div>
+    <div class="card-detail"><ul><li>快照 stale-while-revalidate：開頁立即回應，背景向 Notion 同步，有變更以 SSE 推給所有開著的人</li><li>Notion API 每秒 3 次限流：client 端 token bucket、429 與暫時性錯誤退避重試，行程內文點開才抓並依 last_edited_time 快取</li><li>Notion 圖片網址一小時過期：串流存到磁碟快取，容器記憶體 64MB 內不解碼不縮圖，host 白名單防 SSRF</li><li>唯讀 / 編輯連結即權限，寫入限流、CSP、nginx 只放行 Cloudflare 來源並取真實 IP</li><li>手機優先：拖曳排序、bottom sheet 編輯、地圖先顯示預覽圖再背景載入，首屏 LCP 從 4.7 秒降到 1.7 秒</li></ul><p class="card-role">角色：需求、前後端、Notion 資料模型、部署維運 · <a href="arch/trip.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">互動式架構圖 →</a></p></div></div>
   </article>
 
   </div>

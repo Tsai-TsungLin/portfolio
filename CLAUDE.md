@@ -35,6 +35,7 @@ go build ./... && go vet ./... && go test -race ./...
 | `arch/shiguang.html` | `docs/arch/shiguang.architecture.json` | architecture |
 | `arch/badminton.html` | `docs/arch/badminton.architecture.json` | architecture |
 | `arch/taiex.html` | `docs/arch/taiex.sequence.json` | sequence |
+| `arch/trip.html` | `docs/arch/trip.architecture.json` | architecture |
 
 ```bash
 A=~/.agents/skills/archify/bin/archify.mjs   # <type> 為 architecture 或 sequence

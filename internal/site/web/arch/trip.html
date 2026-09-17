@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="archify 2.17.0-dev.1">
-  <title>羽球輪換系統 Diagram</title>
+  <title>Notion 旅遊行程同步 Diagram</title>
   <script>
     // Resolve the theme before first paint so light-preference users don't
     // see a dark flash. The toolbar script below re-applies with UI state.
@@ -5081,11 +5081,11 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
            data-preset-badge-blueprint="BLUEPRINT / REV 01"
            data-preset-badge-editorial="EDITORIAL / FIELD NOTE">
         <div class="pulse-dot"></div>
-        <h1>羽球輪換系統</h1>
+        <h1>Notion 旅遊行程同步</h1>
       </div>
     </div>
 
-    <script id="archify-guided-views-data" type="application/json">[{"id":"court-ops","label":"場邊操作與同步","focus":["teamui","watch","edge","app","sqlite"],"note":"操作頁寫入後，SSE 把新狀態推給同隊所有裝置與觀戰頁。"},{"id":"signup","label":"LINE 報名","focus":["line","edge","app","sqlite"],"note":"一個 bot 服務所有球隊，由群組 id 解析出所屬球隊。"},{"id":"marketing","label":"AI 自動發文","focus":["app","agent","threads"],"note":"文案由 AI 現生並自動驗證，再排程發到 Threads。"}]</script>
+    <script id="archify-guided-views-data" type="application/json">[{"id":"write","label":"網頁改動寫回 Notion","focus":["browser","edge","app","notion"],"note":"使用者操作當下即時寫回，成功後才更新本地快照。"},{"id":"read","label":"Notion 變更回到網頁","focus":["notion","app","db","browser"],"note":"有人在看才輪詢，抓到變更用 SSE 推給所有開著的人。"},{"id":"images","label":"圖片代理","focus":["browser","app","imgcache","notionimg"],"note":"Notion 圖片網址約一小時過期，一律改走本站代理與磁碟快取。"}]</script>
 
     <script id="archify-i18n-data" type="application/json">{"locale":"en","messages":{"viewer.kind.frontend":"Frontend","viewer.kind.backend":"Backend","viewer.kind.database":"Database","viewer.kind.cloud":"Cloud","viewer.kind.security":"Security","viewer.kind.messagebus":"Message bus","viewer.kind.external":"External","viewer.kind.neutral":"Neutral","viewer.kind.node":"Node","viewer.kind.start":"Start","viewer.kind.active":"Active","viewer.kind.waiting":"Waiting","viewer.kind.decision":"Decision","viewer.kind.success":"Success","viewer.kind.failure":"Failure","viewer.toolbar.actions":"Diagram actions","viewer.theme.toggle.title":"Toggle theme (T)","viewer.theme.toggle":"Toggle color theme","viewer.theme.dark":"Dark","viewer.theme.light":"Light","viewer.preset.choose.title":"Choose visual style (S cycles)","viewer.preset.choose":"Choose visual style","viewer.preset.style":"Style","viewer.preset.menu":"Visual style","viewer.preset.identity":"Visual identity","viewer.preset.cycles":"S cycles","viewer.preset.classic":"Classic","viewer.preset.classic.short":"Classic","viewer.preset.classic.hint":"Stable technical default","viewer.preset.flow":"Signal Flow","viewer.preset.flow.short":"Flow","viewer.preset.flow.hint":"Motion-forward presentation","viewer.preset.blueprint":"Blueprint","viewer.preset.blueprint.hint":"Engineering review","viewer.preset.editorial":"Editorial","viewer.preset.editorial.hint":"Publication and launch notes","viewer.preset.badge.signalFlow":"SIGNAL FLOW","viewer.preset.badge.blueprint":"BLUEPRINT / REV 01","viewer.preset.badge.editorial":"EDITORIAL / FIELD NOTE","viewer.preset.badge.editorialPlate":"ARCHIFY / PLATE 04","viewer.preset.current":"Visual style: {style}. Choose visual style","viewer.motion.live":"Live","viewer.motion.still":"Still","viewer.motion.pause":"Pause motion","viewer.motion.resume":"Resume motion","viewer.motion.reduced":"Motion paused by reduced-motion preference","viewer.motion.hidden":"Motion paused while this page is hidden","viewer.motion.yielding":"Pause motion; currently yielding to {owner}","viewer.motion.yielding.title":"Live preview enabled · yielding to {owner}","viewer.owner.story":"the guided story","viewer.owner.chapter":"the active chapter","viewer.owner.chapterPreview":"the chapter delta preview","viewer.owner.handoff":"the chapter handoff","viewer.owner.route":"Route Probe","viewer.owner.lens":"Semantic Lens","viewer.owner.relationship":"Relationship Preview","viewer.owner.intent":"Intent Trace","viewer.owner.focus":"semantic focus","viewer.owner.legend":"legend preview","viewer.owner.reader":"reader interaction","viewer.present.enter":"Enter presentation stage","viewer.present.enter.title":"Presentation stage (F)","viewer.present.exit":"Exit presentation stage","viewer.present.exit.title":"Exit presentation stage (F or Escape)","viewer.present.present":"Present","viewer.present.exit.label":"Exit","viewer.export.button":"Export","viewer.export.button.title":"Export diagram (E)","viewer.export.diagram":"Export diagram","viewer.export.menu":"Export","viewer.export.subtitle":"Portable, clean outputs","viewer.export.share":"Share","viewer.export.shareCard":"Share Card","viewer.export.routeShareCard":"Route Share Card","viewer.export.reachShareCard":"Reach Share Card","viewer.export.copyShareCard":"Copy Share Card","viewer.export.copyDiagram":"Copy diagram","viewer.export.clipboardPng":"PNG to clipboard","viewer.export.raster":"Raster images","viewer.export.image":"Image","viewer.export.lossless":"Lossless image","viewer.export.compact":"Compact image","viewer.export.modern":"Modern image","viewer.export.vectorMotion":"Vector and motion","viewer.export.vectorMotion.heading":"Vector \u0026 motion","viewer.export.editable":"Editable vector","viewer.export.motion6s":"6s motion","viewer.export.unsupported":"Not supported by this browser","viewer.export.clipboardUnsupported":"Clipboard image write not supported by this browser","viewer.export.clipboardUnsupported.period":"Clipboard image write not supported by this browser.","viewer.export.clipboardUnsupported.short":"Clipboard image write not supported in this browser.","viewer.export.motionUnavailable":"Motion capture unavailable in this browser","viewer.export.webmUnavailable":"WebM unavailable in this browser","viewer.export.failed":"Export failed: {message}","viewer.export.unknownVariant":"Unknown Share Card variant: {variant}","viewer.export.routeRequired":"Trace a route before exporting a Route Share Card","viewer.export.reachRequired":"Trace authored reach before exporting a Reach Share Card","viewer.export.unknown":"unknown","viewer.export.routeFailed":"Route Share Card export failed: {message}","viewer.export.reachFailed":"Reach Share Card export failed: {message}","viewer.export.copyFailed":"Copy failed: {message}","viewer.export.copiedPng":"Copied PNG to clipboard","viewer.export.copiedShare":"Copied Share Card","viewer.export.downloadedShare":"Downloaded Share Card","viewer.export.downloadedRoute":"Downloaded Route Share Card","viewer.export.downloadedReach":"Downloaded Reach Share Card","viewer.export.downloadedWebm":"Downloaded WebM","viewer.export.recording":"Recording 6 seconds of motion…","viewer.export.card.routeSummary.one":"Route: {source} → {target} · {count} directed hop","viewer.export.card.routeSummary.other":"Route: {source} → {target} · {count} directed hops","viewer.export.card.reachSummary":"Authored {direction} from {origin} · {nodes} · {links} · max {hops}","viewer.export.card.node.one":"{count} node","viewer.export.card.node.other":"{count} nodes","viewer.export.card.link.one":"{count} link","viewer.export.card.link.other":"{count} links","viewer.export.card.hop.one":"{count} hop","viewer.export.card.hop.other":"{count} hops","viewer.export.card.routeBadge":"ARCHIFY · ROUTE · {hops}","viewer.export.card.reachBadge":"ARCHIFY · {direction} REACH","viewer.export.card.defaultBadge":"ARCHIFY · {preset} · {theme}","viewer.export.direction.upstream":"Upstream","viewer.export.direction.downstream":"Downstream","viewer.export.error.canvasUnavailable":"Canvas unavailable for {label}","viewer.export.error.contextUnavailable":"2D canvas context unavailable for {label}","viewer.export.error.toBlobUnavailable":"canvas.toBlob unavailable for {label}","viewer.export.error.toBlobNull":"canvas.toBlob returned no data for {label}","viewer.export.error.variantsCombined":"Share Card variants cannot be combined","viewer.export.error.viewerState":"Share Card export could not remove temporary viewer state","viewer.export.error.routeState":"Route Card export could not preserve the resolved route safely","viewer.export.error.reachState":"Reach Card export could not preserve authored reach safely","viewer.export.error.webmRequirements":"WebM motion export requires a trace animation and browser MediaRecorder support","viewer.export.error.mediaRecorder":"MediaRecorder failed","viewer.export.error.emptyWebm":"MediaRecorder produced an empty WebM","viewer.export.error.webmBackground":"SVG background could not be loaded for WebM export","viewer.guided.region":"Guided diagram views","viewer.guided.previous":"Previous guided view","viewer.guided.previous.title":"Previous guided view ([)","viewer.guided.next":"Next guided view","viewer.guided.next.title":"Next guided view (])","viewer.guided.views":"Guided views","viewer.guided.explore":"Explore this system","viewer.guided.intro":"Step through curated paths without changing the source diagram.","viewer.guided.trail":"Story trail","viewer.guided.beat":"Beat","viewer.guided.nextBeat":"Next","viewer.guided.play":"Play guided story","viewer.guided.play.title":"Play guided story (P)","viewer.guided.pause":"Pause guided story","viewer.guided.pause.title":"Pause guided story (P)","viewer.guided.replay":"Replay guided story","viewer.guided.replay.title":"Replay guided story (P)","viewer.guided.playStory":"Play story","viewer.guided.pauseStory":"Pause","viewer.guided.replayStory":"Replay story","viewer.guided.motionUnavailable":"Story playback unavailable while motion is Still","viewer.guided.enableMotion":"Switch motion to Live to play the guided story","viewer.guided.selectBeatLink":"Select a Story Beat to copy its exact link","viewer.guided.copyMoment":"Copy moment","viewer.guided.momentCopied":"Moment link copied","viewer.guided.momentCopyFailed":"Could not copy story moment link","viewer.guided.copied":"Copied","viewer.guided.copyFailed":"Copy failed","viewer.guided.showAll":"Show all","viewer.guided.showAll.aria":"Show entire diagram","viewer.guided.chapters":"Story chapters","viewer.guided.storyTrail":"Story trail for {label}: {count} beats","viewer.guided.chapter.open":"Open chapter {index} of {total}: {label}, {count} stops","viewer.guided.chapter.current":"Current chapter {index} of {total}: {label}, {count} stops","viewer.guided.chapter.selectedNodes":"{count} selected nodes","viewer.guided.chapter.stops":"{count} stops","viewer.guided.chapter.stop.one":"{count} stop","viewer.guided.chapter.stop.other":"{count} stops","viewer.guided.chapter.current.title":"{label} — current chapter, {count} stops","viewer.guided.chapter.delta.expanded":"{stay} stay, {enter} enter, {leave} leave","viewer.guided.chapter.delta.aria":"Open chapter {index} of {total}: {label}. Chapter focus delta: {delta}","viewer.guided.chapter.delta.title":"{label} — {delta} chapter focus","viewer.guided.handoff":"{from} → {to} · via {label}","viewer.guided.share.chapter":"Chapter {index} / {total}","viewer.guided.share.initial":"Chapter 01 / 01","viewer.guided.share.default":"Guided chapter","viewer.guided.state.ready":"Ready","viewer.guided.state.playing":"Playing","viewer.guided.state.settled":"Settled","viewer.guided.state.paused":"Paused","viewer.guided.state.pinned":"Pinned","viewer.guided.state.still":"Still","viewer.guided.share.step":"Step {index} / {total} · {label}","viewer.guided.share.staticMoment":"{step} · Static moment","viewer.guided.share.complete":"{count} steps complete · {note}","viewer.guided.share.settled":"Path settled for reading.","viewer.guided.share.staticPath":"{count} steps · Static path","viewer.guided.share.ready":"{count} steps · Ready","viewer.guided.share.aria":"{state} chapter {index} of {total}: {label}. {beat}. {route}","viewer.guided.beat.start":"Beat {index} / {total} · {label} · starting point","viewer.guided.beat.forward":"Beat {index} / {total} · {from} → {to}","viewer.guided.beat.reverse":"Beat {index} / {total} · {from} → {to} · reverse authored link","viewer.guided.beat.multiple":"Beat {index} / {total} · {from} ⇄ {to} · {count} authored links","viewer.guided.beat.group":"Beat {index} / {total} · {from} · {to} · grouped · no direct link","viewer.guided.beat.aria.prefix":"Story beat {index} of {total}: {label}. ","viewer.guided.beat.aria.start":"Starting point.","viewer.guided.beat.aria.forward":"From {from} through one authored forward relationship.","viewer.guided.beat.aria.reverse":"From {from}; the authored relationship points from {to} to {from}.","viewer.guided.beat.aria.multiple":"From {from} through {count} authored relationships; shown without arbitrary motion.","viewer.guided.beat.aria.group":"Grouped from {from} with no direct authored relationship.","viewer.guided.caption.start":"Starting point","viewer.guided.caption.grouped":"Grouped transition · no direct authored link","viewer.guided.caption.more":" +{count} more","viewer.guided.caption.reverse":"Reverse authored relationship","viewer.guided.caption.relationships":"{count} authored relationships","viewer.guided.caption.relationship":"Authored relationship","viewer.guided.caption.direction":"authored direction: {from} → {to}","viewer.guided.caption.starting":"Authored starting point","viewer.guided.beatLink":"Copy link to current story moment: Beat {index} of {total}: {label}","viewer.guided.noStory":"This diagram has no authored guided story.","viewer.guide.eyebrow":"Diagram guide","viewer.guide.close":"Close diagram guide","viewer.guide.inspecting":"Inspecting compiled semantics","viewer.guide.actions":"Diagram exploration actions","viewer.guide.find":"Find any node","viewer.guide.find.hint":"Search labels, responsibilities, kinds, and stable IDs.","viewer.guide.route":"Trace a route","viewer.guide.route.aria":"Trace a directed route","viewer.guide.route.hint":"Ask how two semantic nodes connect in authored direction.","viewer.guide.map":"See the whole system","viewer.guide.map.hint":"Open Semantic Radar with a live viewport and stable nodes.","viewer.guide.lens":"Compare semantic kinds","viewer.guide.lens.hint":"Count roles, reveal their traffic, and compare direct authored links.","viewer.guide.story":"Play the guided story","viewer.guide.story.hint":"Walk the authored chapters and real relationships.","viewer.guide.present":"Enter Presentation Stage","viewer.guide.present.hint":"Give the live diagram the viewport without changing export.","viewer.guide.shortcuts":"Additional keyboard shortcuts","viewer.guide.shortcut.export":"Export","viewer.guide.shortcut.theme":"Theme","viewer.guide.shortcut.style":"Style","viewer.guide.shortcut.reset":"Reset","viewer.guide.shortcut.zoomIn":"Zoom in","viewer.guide.shortcut.zoomOut":"Zoom out","viewer.guide.shortcut.close":"Close","viewer.guide.facts":"{nodes} · {relationships} · {views}","viewer.guide.fact.node.one":"{count} semantic node","viewer.guide.fact.node.other":"{count} semantic nodes","viewer.guide.fact.relationship.one":"{count} relationship","viewer.guide.fact.relationship.other":"{count} relationships","viewer.guide.fact.view.one":"{count} guided view","viewer.guide.fact.view.other":"{count} guided views","viewer.guide.story.available.one":"Walk {count} authored chapter and its real relationships.","viewer.guide.story.available.other":"Walk {count} authored chapters and their real relationships.","viewer.guide.story.unavailable":"No authored guided story in this diagram.","viewer.guide.open":"Open diagram guide","viewer.guide.noStory":"This diagram has no authored guided story.","viewer.finder.title":"Find a node","viewer.finder.close":"Close node finder","viewer.finder.placeholder":"Search labels or IDs","viewer.finder.search":"Search diagram nodes","viewer.finder.results":"Diagram nodes","viewer.finder.empty":"No matching nodes","viewer.finder.result.focus":"Focus {label}","viewer.finder.result.routeStart":"Choose {label} as route start","viewer.finder.result.routeTarget":"Choose {label} as route destination, {links}","viewer.finder.status.empty":"No matching nodes","viewer.finder.status.count.one":"{count} matching node","viewer.finder.status.count.other":"{count} matching nodes","viewer.finder.noun.nodes":"nodes","viewer.finder.link.one":"{count} link","viewer.finder.link.other":"{count} links","viewer.finder.result.focus.one":"Focus {label}, {count} related connection","viewer.finder.result.focus.other":"Focus {label}, {count} related connections","viewer.finder.status.filtered":"{visible} of {available} {noun}","viewer.finder.status.all":"{available} {noun}","viewer.passport.eyebrow":"Semantic passport","viewer.passport.metadata":"Node metadata","viewer.passport.evidence":"Verified source evidence","viewer.passport.verified":"Verified source","viewer.passport.verificationScope":"Verified against local Git at the pinned revision. Remote access has not been checked.","viewer.passport.reach":"Authored reach","viewer.passport.reach.trace":"Trace authored reachability","viewer.passport.upstream":"Upstream","viewer.passport.downstream":"Downstream","viewer.passport.upstream.trace":"Trace upstream authored reachability","viewer.passport.downstream.trace":"Trace downstream authored reachability","viewer.passport.close":"Close semantic passport","viewer.passport.copy":"Copy link","viewer.passport.copy.focus":"Copy link to focused node","viewer.passport.relations":"Relations","viewer.passport.relations.show":"Show connected relationships","viewer.passport.relations.hide":"Hide connected relationships","viewer.passport.relations.list":"Connected relationships","viewer.passport.copyRelation":"Copy relation","viewer.passport.copyNode":"Copy node","viewer.passport.copyPinned":"Copy link to pinned relationship","viewer.passport.copySource":"Copy link to source node","viewer.passport.copy.focused.success":"Focused node link copied","viewer.passport.copy.pinned.success":"Pinned relationship link copied","viewer.passport.copy.focused.failed":"Could not copy focused node link","viewer.passport.copy.pinned.failed":"Could not copy pinned relationship link","viewer.passport.relationship.none":"No connected relationships","viewer.passport.relationship.count.one":"{count} relation","viewer.passport.relationship.count.other":"{count} relations","viewer.passport.relationship.show.one":"Show {count} connected relationship","viewer.passport.relationship.show.other":"Show {count} connected relationships","viewer.passport.relationship.summary":"{out} outgoing · {in} incoming{loops}","viewer.passport.relationship.loops":" · {count} loop","viewer.passport.relationship.explorer":"Direct relationship explorer","viewer.passport.relationship.help":"Use arrow keys to explore relationships. Press Enter or Space to pin details; Escape clears.","viewer.passport.relationship.loopsBack":"loops back","viewer.passport.relationship.connectsTo":"connects to","viewer.passport.relationship.connectsFrom":"connects from","viewer.passport.relationship.pinned":"Pinned relationship · {from} → {to} · {label}","viewer.passport.relationship.inspect":"Inspect relationship {index} of {total}: {from} to {to}, {label}. Press Enter for details.","viewer.passport.relationship.group.out":"Outgoing","viewer.passport.relationship.group.in":"Incoming","viewer.passport.relationship.group.loop":"Self loops","viewer.passport.relationship.row":"{group}: {relationship}, {neighbor}","viewer.passport.relationship.direction.out":"OUT →","viewer.passport.relationship.direction.in":"← IN","viewer.passport.relationship.direction.loop":"LOOP","viewer.passport.sourceCount.one":"{count} verified source reference","viewer.passport.sourceCount.other":"{count} verified source references","viewer.passport.sourceMarker":"SRC","viewer.passport.beacon.one":"{count} verified source; focus this node to inspect","viewer.passport.beacon.other":"{count} verified sources; focus this node to inspect","viewer.passport.repository.open":"Open verified repository revision {revision}","viewer.passport.source.open":"Open verified source {path} at revision {revision}","viewer.passport.source.openLink":"Open ↗","viewer.passport.reach.upstream.one":"Trace {count} upstream authored node","viewer.passport.reach.upstream.other":"Trace {count} upstream authored nodes","viewer.passport.reach.downstream.one":"Trace {count} downstream authored node","viewer.passport.reach.downstream.other":"Trace {count} downstream authored nodes","viewer.passport.reach.noUpstream":"No upstream authored nodes","viewer.passport.reach.noDownstream":"No downstream authored nodes","viewer.passport.reach.status":"{direction} · {nodes} nodes · {links} links · max {hops} hops","viewer.route.eyebrow":"Route probe","viewer.route.start":"Choose a start node","viewer.route.start.find":"Find start","viewer.route.start.find.aria":"Find a route start","viewer.route.copy":"Copy link","viewer.route.copy.aria":"Copy link to traced route","viewer.route.clear":"Clear","viewer.route.clear.aria":"Clear route probe","viewer.route.traced":"Traced route","viewer.route.pickTwo":"Pick two semantic nodes on the diagram","viewer.route.pickOne":"Pick a semantic node on the diagram","viewer.route.controls":"Route journey controls","viewer.route.previous":"Previous route position","viewer.route.play":"Play route journey","viewer.route.pause":"Pause route journey","viewer.route.replay":"Replay route journey","viewer.route.next":"Next route position","viewer.route.journey":"Journey","viewer.route.pause.label":"Pause","viewer.route.replay.label":"Replay","viewer.route.overview":"Overview","viewer.route.overview.aria":"Show complete route overview","viewer.route.instructions":"Choose the source, then the destination. Direction matters.","viewer.route.destination":"Choose a destination from {label}","viewer.route.destination.find":"Find target","viewer.route.destination.find.aria":"Find a reachable route destination","viewer.route.differentDestination":"Choose a different destination","viewer.route.distinct":"A route needs two distinct semantic nodes.","viewer.route.unreachable":"No directed route to {label}","viewer.route.unreachable.detail":"{target} is not reachable from {source}. Pick a highlighted destination.","viewer.route.start.instructions":"Select the source. The next step will reveal only directed destinations.","viewer.route.copy.success":"Traced route link copied","viewer.route.copy.failed":"Could not copy traced route link","viewer.route.position":"Route position {index} of {total}: {label}","viewer.route.step":"Step {index} of {total} · {phase} · {label}","viewer.route.motionRequired":"Automatic journey requires Live motion","viewer.route.trigger.clear":"Clear traced route","viewer.route.overview.status":"{nodes} · {hops} · shortest authored route","viewer.route.overview.node.one":"{count} node","viewer.route.overview.node.other":"{count} nodes","viewer.route.overview.hop.one":"{count} directed hop","viewer.route.overview.hop.other":"{count} directed hops","viewer.route.phase.playing":"Playing","viewer.route.phase.complete":"Complete","viewer.route.phase.inspecting":"Inspecting","viewer.route.destination.count.one":"{count} directed destination available. Pick a highlighted node.","viewer.route.destination.count.other":"{count} directed destinations available. Pick a highlighted node.","viewer.route.noOutgoing":"No outgoing route starts here. Clear and choose another source.","viewer.route.result.title":"{source} to {target}","viewer.route.finder.source.title":"Choose route start","viewer.route.finder.source.placeholder":"Search route sources","viewer.route.finder.source.empty":"No matching route sources","viewer.route.finder.source.results":"Nodes that can start a route","viewer.route.finder.source.noun":"route sources","viewer.route.finder.source.badge":"start","viewer.route.finder.target.title":"Destination from {label}","viewer.route.finder.target.placeholder":"Search reachable destinations","viewer.route.finder.target.empty":"No matching reachable destinations","viewer.route.finder.target.results":"Reachable route destinations","viewer.route.finder.target.noun":"reachable destinations","viewer.route.hop.one":"{count} hop","viewer.route.hop.other":"{count} hops","viewer.lens.eyebrow":"Semantic lens","viewer.lens.title":"Compare system roles","viewer.lens.close":"Close semantic lens","viewer.lens.instruction":"Choose up to two semantic kinds. One reveals its real traffic; two compare only direct authored relationships.","viewer.lens.kinds":"Semantic kinds","viewer.lens.choose":"Choose a kind to inspect its nodes and touching relationships.","viewer.lens.copy":"Copy link to semantic lens","viewer.lens.clear":"Clear semantic lens","viewer.lens.open":"Open semantic lens","viewer.lens.openActive":"Open active semantic lens","viewer.lens.legend":"Semantic legend","viewer.lens.legend.inspect.one":"Inspect {label}, {count} node","viewer.lens.legend.inspect.other":"Inspect {label}, {count} nodes","viewer.lens.kind.count.one":"{label}, {count} node","viewer.lens.kind.count.other":"{label}, {count} nodes","viewer.lens.compare.one":"{first} → {second}: {forward} · {second} → {first}: {reverse} · {count} direct relationship","viewer.lens.compare.other":"{first} → {second}: {forward} · {second} → {first}: {reverse} · {count} direct relationships","viewer.lens.single":"{nodes} · {relationships} · connected peers remain visible","viewer.lens.node.one":"{count} {label} node","viewer.lens.node.other":"{count} {label} nodes","viewer.lens.relationship.one":"{count} touching relationship","viewer.lens.relationship.other":"{count} touching relationships","viewer.radar.title":"Semantic radar","viewer.radar.building":"Building overview","viewer.radar.openFull":"Open full semantic radar","viewer.radar.open":"Open radar","viewer.radar.close":"Close semantic radar","viewer.radar.surface":"Diagram overview. Click a node to focus it, or use arrow keys to pan.","viewer.radar.click":"Click node","viewer.radar.drag":"Drag to pan","viewer.radar.space":"Semantic radar needs more MAP space.","viewer.radar.nodes":"Semantic diagram radar nodes","viewer.radar.focus":"Focus {label} from Semantic Radar","viewer.radar.status":"{count} nodes · {viewport}","viewer.radar.fullMap":"{count} nodes · full map","viewer.radar.compacted":"Radar compacted to avoid covering the Semantic Passport or MAP controls.","viewer.radar.cancelWaiting":"Cancel semantic radar waiting for more MAP space","viewer.radar.needsSpace":"Semantic radar needs more visible MAP space","viewer.radar.viewport.full":"full map","viewer.radar.viewport.width":"{percent}% width","viewer.radar.viewport.scale":"{percent}% viewport","viewer.nav.controls":"Diagram view controls","viewer.nav.route":"Trace a directed route","viewer.nav.route.title":"Trace route (R)","viewer.nav.route.short":"PATH","viewer.nav.radar":"Open semantic radar","viewer.nav.radar.title":"Semantic radar (M)","viewer.nav.radar.short":"MAP","viewer.nav.lens":"Open semantic lens","viewer.nav.lens.title":"Semantic lens (L)","viewer.nav.lens.short":"LENS","viewer.nav.find":"Find a node","viewer.nav.find.title":"Find a node (/)","viewer.nav.guide":"Open diagram guide","viewer.nav.guide.title":"Diagram guide (?)","viewer.nav.zoomOut":"Zoom out","viewer.nav.zoomOut.title":"Zoom out (-)","viewer.nav.reset":"Reset diagram view","viewer.nav.reset.title":"Reset view (0)","viewer.nav.read":"READ","viewer.nav.zoomIn":"Zoom in","viewer.nav.zoomIn.title":"Zoom in (+)","viewer.nav.camera":"{hint}. Reset diagram view","viewer.nav.camera.title":"{semantic}{hint} · reset view (0)","viewer.nav.camera.semantic":"Semantic camera active · ","viewer.nav.level.map":"MAP","viewer.nav.level.read":"READ","viewer.nav.level.full":"FULL","viewer.nav.level.auto":"AUTO","viewer.nav.detail.map":"Zoom in to reveal relationship labels and node context","viewer.nav.detail.read":"Zoom in again to reveal tags and annotations","viewer.nav.detail.full":"Full diagram detail","viewer.intent.summary":"{label}. {out} outgoing, {in} incoming{loops}. {total} connections. Press Enter for details.","viewer.intent.loops":", {count} self loop","viewer.common.copied":"Copied","viewer.common.copyFailed":"Copy failed","viewer.common.copyLink":"Copy link","viewer.common.clear":"Clear","viewer.common.close":"Close"}}</script>
     <div class="guided-views no-print" id="guided-views" hidden aria-label="Guided diagram views">
@@ -5131,7 +5131,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     <div class="diagram-container" data-detail-level="read"
          data-preset-badge-editorial-plate="ARCHIFY / PLATE 04">
       <svg viewBox="0 0 1300 670" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="editorial" data-quality-profile="showcase">
-        <title id="archify-diagram-title">羽球輪換系統</title>
+        <title id="archify-diagram-title">Notion 旅遊行程同步</title>
         <desc id="archify-diagram-description">An architecture diagram generated by Archify.</desc>
         <!-- Definitions -->
         <defs>
@@ -5156,22 +5156,22 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <rect width="100%" height="100%" fill="url(#grid)" />
 
         <!-- Boundaries (behind everything) -->
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="GCP VM line-bot" x="310" y="290" width="880" height="316" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="GCP VM line-bot · 容器上限 64MB" x="300" y="300" width="630" height="296" rx="12" class="c-region" stroke-width="1"/>
 
         <!-- Connection paths (before components for correct z-order) -->
-        <path data-edge-from="teamui" data-edge-to="edge" data-edge-label="HTTPS + SSE" data-edge-key="0" data-edge-id="ops" data-composition-points="230,153;285,153;285,339;340,339" d="M 230 153 L 277 153 Q 285 153 285 161 L 285 331 Q 285 339 293 339 L 340 339" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="watch" data-edge-to="edge" data-edge-key="1" data-edge-id="watch-in" data-composition-points="230,353;340,353" d="M 230 353 L 340 353" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="admin" data-edge-to="edge" data-edge-label="後台 API" data-edge-key="2" data-edge-id="admin-in" data-composition-points="230,553;285,553;285,367;340,367" d="M 230 553 L 277 553 Q 285 553 285 545 L 285 375 Q 285 367 293 367 L 340 367" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="line" data-edge-to="edge" data-edge-label="Webhook" data-edge-key="3" data-edge-id="webhook" data-composition-points="430,126;430,320" d="M 430 126 L 430 320" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="edge" data-edge-to="app" data-edge-label="反向代理 · 不緩衝" data-edge-key="4" data-edge-id="proxy" data-composition-points="520,353;660,353" d="M 520 353 L 660 353" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="app" data-edge-to="sqlite" data-edge-label="單一交易寫入" data-edge-key="5" data-edge-id="mutate" data-composition-points="755,386;755,520" d="M 755 386 L 755 520" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="app" data-edge-to="agent" data-edge-label="文案生成" data-edge-key="6" data-edge-id="ai-copy" data-composition-points="850,360;915,360;915,553;980,553" d="M 850 360 L 907 360 Q 915 360 915 368 L 915 545 Q 915 553 923 553 L 980 553" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="app" data-edge-to="threads" data-edge-label="Graph API 發文" data-edge-key="7" data-edge-id="post" data-composition-points="755,320;755,296;771,296;771,150;750,150;750,126" d="M 755 320 L 755 304 Q 755 296 763 296 L 763 296 Q 771 296 771 288 L 771 158 Q 771 150 763 150 L 758 150 Q 750 150 750 142 L 750 126" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="app" data-edge-to="telegram" data-edge-label="通知" data-edge-key="8" data-edge-id="tg" data-composition-points="850,346;915,346;915,93;980,93" d="M 850 346 L 907 346 Q 915 346 915 338 L 915 101 Q 915 93 923 93 L 980 93" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+        <path data-edge-from="browser" data-edge-to="edge" data-edge-label="HTTPS · SSE" data-edge-key="0" data-edge-id="view" data-composition-points="230,363;330,363" d="M 230 363 L 330 363" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="admin" data-edge-to="edge" data-edge-label="後台 API" data-edge-key="1" data-edge-id="admin-in" data-composition-points="230,153;425,153;425,330" d="M 230 153 L 417 153 Q 425 153 425 161 L 425 330" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="browser" data-edge-to="maps" data-edge-label="iframe" data-edge-key="2" data-edge-id="iframe" data-composition-points="135,396;135,510" d="M 135 396 L 135 510" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="edge" data-edge-to="app" data-edge-label="只放行 Cloudflare 來源" data-edge-key="3" data-edge-id="proxy" data-composition-points="520,363;700,363" d="M 520 363 L 700 363" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="app" data-edge-to="db" data-edge-label="快照與 token" data-edge-key="4" data-edge-id="persist" data-composition-points="800,396;800,510" d="M 800 396 L 800 510" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="app" data-edge-to="notion" data-edge-label="寫回（操作當下）" data-edge-key="5" data-edge-id="write-back" data-composition-points="900,370;1060,370" d="M 900 370 L 1060 370" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="notion" data-edge-to="app" data-edge-label="輪詢拉回變更" data-edge-key="6" data-edge-id="poll" data-composition-points="1060,356;900,356" d="M 1060 356 L 900 356" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+        <path data-edge-from="app" data-edge-to="notionimg" data-edge-label="串流下載" data-edge-key="7" data-edge-id="img" data-composition-points="800,330;800,153;1060,153" d="M 800 330 L 800 161 Q 800 153 808 153 L 1060 153" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="app" data-edge-to="imgcache" data-edge-label="落檔不解碼" data-edge-key="8" data-edge-id="imgstore" data-composition-points="700,363;640,363;640,470;425,470;425,510" d="M 700 363 L 648 363 Q 640 363 640 371 L 640 462 Q 640 470 632 470 L 433 470 Q 425 470 425 478 L 425 510" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
 
         <!-- Components -->
-        <g id="node-teamui" data-node-id="teamui" data-node-label="球隊操作頁" tabindex="0" role="button" aria-label="Focus 球隊操作頁, iPad 拖曳 · Pointer Events, Architecture component" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="iPad 拖曳 · Pointer Events" data-node-context="Architecture component">
-          <title>球隊操作頁 · iPad 拖曳 · Pointer Events · Architecture component</title>
+        <g id="node-admin" data-node-id="admin" data-node-label="後台" tabindex="0" role="button" aria-label="Focus 後台, 產生連結 · HMAC session, Architecture component" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="產生連結 · HMAC session" data-node-context="Architecture component">
+          <title>後台 · 產生連結 · HMAC session · Architecture component</title>
           <rect x="40" y="120" width="190" height="66" rx="6" class="c-mask"/>
           <rect x="40" y="120" width="190" height="66" rx="6" class="c-frontend" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(46 126) scale(0.6875)">
@@ -5180,160 +5180,148 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="135" y="151" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">球隊操作頁</text>
-        <text data-detail="context" x="135" y="167" class="t-muted" font-size="9" text-anchor="middle">iPad 拖曳 · Pointer Events</text>
+          <text data-node-label="" data-detail-anchor="" x="135" y="151" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">後台</text>
+        <text data-detail="context" x="135" y="167" class="t-muted" font-size="9" text-anchor="middle">產生連結 · HMAC session</text>
         </g>
 
-        <g id="node-watch" data-node-id="watch" data-node-label="觀戰頁 / 大螢幕" tabindex="0" role="button" aria-label="Focus 觀戰頁 / 大螢幕, 掃 QR 免登入唯讀, Architecture component" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="掃 QR 免登入唯讀" data-node-context="Architecture component">
-          <title>觀戰頁 / 大螢幕 · 掃 QR 免登入唯讀 · Architecture component</title>
-          <rect x="40" y="320" width="190" height="66" rx="6" class="c-mask"/>
-          <rect x="40" y="320" width="190" height="66" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(46 326) scale(0.6875)">
+        <g id="node-browser" data-node-id="browser" data-node-label="行程頁" tabindex="0" role="button" aria-label="Focus 行程頁, 唯讀 / 編輯分享連結, Architecture component" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="唯讀 / 編輯分享連結" data-node-context="Architecture component">
+          <title>行程頁 · 唯讀 / 編輯分享連結 · Architecture component</title>
+          <rect x="40" y="330" width="190" height="66" rx="6" class="c-mask"/>
+          <rect x="40" y="330" width="190" height="66" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(46 336) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="135" y="351" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">觀戰頁 / 大螢幕</text>
-        <text data-detail="context" x="135" y="367" class="t-muted" font-size="9" text-anchor="middle">掃 QR 免登入唯讀</text>
+          <text data-node-label="" data-detail-anchor="" x="135" y="361" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">行程頁</text>
+        <text data-detail="context" x="135" y="377" class="t-muted" font-size="9" text-anchor="middle">唯讀 / 編輯分享連結</text>
         </g>
 
-        <g id="node-admin" data-node-id="admin" data-node-label="superadmin 後台" tabindex="0" role="button" aria-label="Focus superadmin 後台, 方案 · 付款 · IP 黑名單, Architecture component" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="方案 · 付款 · IP 黑名單" data-node-context="Architecture component">
-          <title>superadmin 後台 · 方案 · 付款 · IP 黑名單 · Architecture component</title>
-          <rect x="40" y="520" width="190" height="66" rx="6" class="c-mask"/>
-          <rect x="40" y="520" width="190" height="66" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(46 526) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="135" y="551" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">superadmin 後台</text>
-        <text data-detail="context" x="135" y="567" class="t-muted" font-size="9" text-anchor="middle">方案 · 付款 · IP 黑名單</text>
-        </g>
-
-        <g id="node-line" data-node-id="line" data-node-label="LINE 群組" tabindex="0" role="button" aria-label="Focus LINE 群組, +1 / -1 報名 · 開團, Architecture component" aria-pressed="false" data-node-kind="external" data-node-sublabel="+1 / -1 報名 · 開團" data-node-context="Architecture component">
-          <title>LINE 群組 · +1 / -1 報名 · 開團 · Architecture component</title>
-          <rect x="340" y="60" width="180" height="66" rx="6" class="c-mask"/>
-          <rect x="340" y="60" width="180" height="66" rx="6" class="c-external" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(346 66) scale(0.6875)">
+        <g id="node-maps" data-node-id="maps" data-node-label="Google 我的地圖" tabindex="0" role="button" aria-label="Focus Google 我的地圖, iframe 延遲載入, Architecture component" aria-pressed="false" data-node-kind="external" data-node-sublabel="iframe 延遲載入" data-node-context="Architecture component">
+          <title>Google 我的地圖 · iframe 延遲載入 · Architecture component</title>
+          <rect x="40" y="510" width="190" height="66" rx="6" class="c-mask"/>
+          <rect x="40" y="510" width="190" height="66" rx="6" class="c-external" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(46 516) scale(0.6875)">
             <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
             <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="430" y="91" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">LINE 群組</text>
-        <text data-detail="context" x="430" y="107" class="t-muted" font-size="9" text-anchor="middle">+1 / -1 報名 · 開團</text>
+          <text data-node-label="" data-detail-anchor="" x="135" y="541" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Google 我的地圖</text>
+        <text data-detail="context" x="135" y="557" class="t-muted" font-size="9" text-anchor="middle">iframe 延遲載入</text>
         </g>
 
-        <g id="node-edge" data-node-id="edge" data-node-label="Cloudflare + nginx" tabindex="0" role="button" aria-label="Focus Cloudflare + nginx, court.relexes.com, GCP VM line-bot" aria-pressed="false" data-node-kind="security" data-node-sublabel="court.relexes.com" data-node-context="GCP VM line-bot">
-          <title>Cloudflare + nginx · court.relexes.com · GCP VM line-bot</title>
-          <rect x="340" y="320" width="180" height="66" rx="6" class="c-mask"/>
-          <rect x="340" y="320" width="180" height="66" rx="6" class="c-security" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(346 326) scale(0.6875)">
+        <g id="node-edge" data-node-id="edge" data-node-label="Cloudflare + nginx" tabindex="0" role="button" aria-label="Focus Cloudflare + nginx, trip.relexes.com, GCP VM line-bot · 容器上限 64MB" aria-pressed="false" data-node-kind="security" data-node-sublabel="trip.relexes.com" data-node-context="GCP VM line-bot · 容器上限 64MB">
+          <title>Cloudflare + nginx · trip.relexes.com · GCP VM line-bot · 容器上限 64MB</title>
+          <rect x="330" y="330" width="190" height="66" rx="6" class="c-mask"/>
+          <rect x="330" y="330" width="190" height="66" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(336 336) scale(0.6875)">
             <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
             <path d="m5.8 8 1.5 1.5 3-3"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="430" y="351" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Cloudflare + nginx</text>
-        <text data-detail="context" x="430" y="367" class="t-muted" font-size="9" text-anchor="middle">court.relexes.com</text>
+          <text data-node-label="" data-detail-anchor="" x="425" y="361" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Cloudflare + nginx</text>
+        <text data-detail="context" x="425" y="377" class="t-muted" font-size="9" text-anchor="middle">trip.relexes.com</text>
         </g>
 
-        <g id="node-app" data-node-id="app" data-node-label="Go 單一 binary" tabindex="0" role="button" aria-label="Focus Go 單一 binary, 內嵌 HTML/JS · SSE hub, GCP VM line-bot" aria-pressed="false" data-node-kind="backend" data-node-sublabel="內嵌 HTML/JS · SSE hub" data-node-context="GCP VM line-bot">
-          <title>Go 單一 binary · 內嵌 HTML/JS · SSE hub · GCP VM line-bot</title>
-          <rect x="660" y="320" width="190" height="66" rx="6" class="c-mask"/>
-          <rect x="660" y="320" width="190" height="66" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(666 326) scale(0.6875)">
+        <g id="node-imgcache" data-node-id="imgcache" data-node-label="圖片磁碟快取" tabindex="0" role="button" aria-label="Focus 圖片磁碟快取, volume trip_data, GCP VM line-bot · 容器上限 64MB" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="volume trip_data" data-node-context="GCP VM line-bot · 容器上限 64MB">
+          <title>圖片磁碟快取 · volume trip_data · GCP VM line-bot · 容器上限 64MB</title>
+          <rect x="330" y="510" width="190" height="66" rx="6" class="c-mask"/>
+          <rect x="330" y="510" width="190" height="66" rx="6" class="c-cloud" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="cloud" class="semantic-sigil s-cloud" transform="translate(336 516) scale(0.6875)">
+            <path d="M4.3 12.5h7.3a2.4 2.4 0 0 0 .2-4.8 4 4 0 0 0-7.5-1.3A3.1 3.1 0 0 0 4.3 12.5Z"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="425" y="541" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">圖片磁碟快取</text>
+        <text data-detail="context" x="425" y="557" class="t-muted" font-size="9" text-anchor="middle">volume trip_data</text>
+        </g>
+
+        <g id="node-app" data-node-id="app" data-node-label="trip-app" tabindex="0" role="button" aria-label="Focus trip-app, Go 單一 binary · 內嵌靜態頁, GCP VM line-bot · 容器上限 64MB" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Go 單一 binary · 內嵌靜態頁" data-node-context="GCP VM line-bot · 容器上限 64MB">
+          <title>trip-app · Go 單一 binary · 內嵌靜態頁 · GCP VM line-bot · 容器上限 64MB</title>
+          <rect x="700" y="330" width="200" height="66" rx="6" class="c-mask"/>
+          <rect x="700" y="330" width="200" height="66" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(706 336) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="755" y="351" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Go 單一 binary</text>
-        <text data-detail="context" x="755" y="367" class="t-muted" font-size="9" text-anchor="middle">內嵌 HTML/JS · SSE hub</text>
+          <text data-node-label="" data-detail-anchor="" x="800" y="361" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">trip-app</text>
+        <text data-detail="context" x="800" y="377" class="t-muted" font-size="9" text-anchor="middle">Go 單一 binary · 內嵌靜態頁</text>
         </g>
 
-        <g id="node-sqlite" data-node-id="sqlite" data-node-label="SQLite" tabindex="0" role="button" aria-label="Focus SQLite, WAL · 單一寫入連線, GCP VM line-bot" aria-pressed="false" data-node-kind="database" data-node-sublabel="WAL · 單一寫入連線" data-node-context="GCP VM line-bot">
-          <title>SQLite · WAL · 單一寫入連線 · GCP VM line-bot</title>
-          <rect x="660" y="520" width="190" height="66" rx="6" class="c-mask"/>
-          <rect x="660" y="520" width="190" height="66" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(666 526) scale(0.6875)">
+        <g id="node-db" data-node-id="db" data-node-label="SQLite" tabindex="0" role="button" aria-label="Focus SQLite, 快照 · token · 內文快取, GCP VM line-bot · 容器上限 64MB" aria-pressed="false" data-node-kind="database" data-node-sublabel="快照 · token · 內文快取" data-node-context="GCP VM line-bot · 容器上限 64MB">
+          <title>SQLite · 快照 · token · 內文快取 · GCP VM line-bot · 容器上限 64MB</title>
+          <rect x="700" y="510" width="200" height="66" rx="6" class="c-mask"/>
+          <rect x="700" y="510" width="200" height="66" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(706 516) scale(0.6875)">
             <ellipse cx="8" cy="4" rx="5" ry="2"/>
             <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="755" y="551" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">SQLite</text>
-        <text data-detail="context" x="755" y="567" class="t-muted" font-size="9" text-anchor="middle">WAL · 單一寫入連線</text>
+          <text data-node-label="" data-detail-anchor="" x="800" y="541" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">SQLite</text>
+        <text data-detail="context" x="800" y="557" class="t-muted" font-size="9" text-anchor="middle">快照 · token · 內文快取</text>
         </g>
 
-        <g id="node-threads" data-node-id="threads" data-node-label="Threads" tabindex="0" role="button" aria-label="Focus Threads, 排程發文 · token 自動續期, Architecture component" aria-pressed="false" data-node-kind="external" data-node-sublabel="排程發文 · token 自動續期" data-node-context="Architecture component">
-          <title>Threads · 排程發文 · token 自動續期 · Architecture component</title>
-          <rect x="660" y="60" width="180" height="66" rx="6" class="c-mask"/>
-          <rect x="660" y="60" width="180" height="66" rx="6" class="c-external" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(666 66) scale(0.6875)">
+        <g id="node-notionimg" data-node-id="notionimg" data-node-label="Notion 圖片主機" tabindex="0" role="button" aria-label="Focus Notion 圖片主機, 網址約一小時過期, Architecture component" aria-pressed="false" data-node-kind="external" data-node-sublabel="網址約一小時過期" data-node-context="Architecture component">
+          <title>Notion 圖片主機 · 網址約一小時過期 · Architecture component</title>
+          <rect x="1060" y="120" width="190" height="66" rx="6" class="c-mask"/>
+          <rect x="1060" y="120" width="190" height="66" rx="6" class="c-external" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(1066 126) scale(0.6875)">
             <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
             <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="750" y="91" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Threads</text>
-        <text data-detail="context" x="750" y="107" class="t-muted" font-size="9" text-anchor="middle">排程發文 · token 自動續期</text>
+          <text data-node-label="" data-detail-anchor="" x="1155" y="151" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Notion 圖片主機</text>
+        <text data-detail="context" x="1155" y="167" class="t-muted" font-size="9" text-anchor="middle">網址約一小時過期</text>
         </g>
 
-        <g id="node-agent" data-node-id="agent" data-node-label="claude-agent" tabindex="0" role="button" aria-label="Focus claude-agent, 共用 AI 服務, GCP VM line-bot" aria-pressed="false" data-node-kind="external" data-node-sublabel="共用 AI 服務" data-node-context="GCP VM line-bot">
-          <title>claude-agent · 共用 AI 服務 · GCP VM line-bot</title>
-          <rect x="980" y="520" width="180" height="66" rx="6" class="c-mask"/>
-          <rect x="980" y="520" width="180" height="66" rx="6" class="c-external" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(986 526) scale(0.6875)">
+        <g id="node-notion" data-node-id="notion" data-node-label="Notion API" tabindex="0" role="button" aria-label="Focus Notion API, 行程資料的真相來源, Architecture component" aria-pressed="false" data-node-kind="external" data-node-sublabel="行程資料的真相來源" data-node-context="Architecture component">
+          <title>Notion API · 行程資料的真相來源 · Architecture component</title>
+          <rect x="1060" y="330" width="190" height="66" rx="6" class="c-mask"/>
+          <rect x="1060" y="330" width="190" height="66" rx="6" class="c-external" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(1066 336) scale(0.6875)">
             <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
             <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="1070" y="551" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">claude-agent</text>
-        <text data-detail="context" x="1070" y="567" class="t-muted" font-size="9" text-anchor="middle">共用 AI 服務</text>
-        </g>
-
-        <g id="node-telegram" data-node-id="telegram" data-node-label="Telegram" tabindex="0" role="button" aria-label="Focus Telegram, 待回留言 · 配額 · 失敗通知, Architecture component" aria-pressed="false" data-node-kind="external" data-node-sublabel="待回留言 · 配額 · 失敗通知" data-node-context="Architecture component">
-          <title>Telegram · 待回留言 · 配額 · 失敗通知 · Architecture component</title>
-          <rect x="980" y="60" width="180" height="66" rx="6" class="c-mask"/>
-          <rect x="980" y="60" width="180" height="66" rx="6" class="c-external" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(986 66) scale(0.6875)">
-            <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
-            <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="1070" y="91" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Telegram</text>
-        <text data-detail="context" x="1070" y="107" class="t-muted" font-size="9" text-anchor="middle">待回留言 · 配額 · 失敗通知</text>
+          <text data-node-label="" data-detail-anchor="" x="1155" y="361" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Notion API</text>
+        <text data-detail="context" x="1155" y="377" class="t-muted" font-size="9" text-anchor="middle">行程資料的真相來源</text>
         </g>
 
         <!-- Connection labels -->
-        <g data-detail="context" data-edge-from="teamui" data-edge-to="edge" data-edge-label="HTTPS + SSE" data-edge-key="0" data-edge-id="ops">
-          <rect x="253.6" y="226" width="62.8" height="14" rx="3" class="c-mask"/>
-          <text x="285" y="236" class="t-backend" font-size="8" text-anchor="middle">HTTPS + SSE</text>
+        <g data-detail="context" data-edge-from="browser" data-edge-to="edge" data-edge-label="HTTPS · SSE" data-edge-key="0" data-edge-id="view">
+          <rect x="248.6" y="343" width="62.8" height="14" rx="3" class="c-mask"/>
+          <text x="280" y="353" class="t-backend" font-size="8" text-anchor="middle">HTTPS · SSE</text>
         </g>
-
-        <g data-detail="context" data-edge-from="admin" data-edge-to="edge" data-edge-label="後台 API" data-edge-key="2" data-edge-id="admin-in">
-          <rect x="260.8" y="440" width="48.4" height="14" rx="3" class="c-mask"/>
-          <text x="285" y="450" class="t-muted" font-size="8" text-anchor="middle">後台 API</text>
+        <g data-detail="context" data-edge-from="admin" data-edge-to="edge" data-edge-label="後台 API" data-edge-key="1" data-edge-id="admin-in">
+          <rect x="400.8" y="221.5" width="48.4" height="14" rx="3" class="c-mask"/>
+          <text x="425" y="231.5" class="t-muted" font-size="8" text-anchor="middle">後台 API</text>
         </g>
-        <g data-detail="context" data-edge-from="line" data-edge-to="edge" data-edge-label="Webhook" data-edge-key="3" data-edge-id="webhook">
-          <rect x="408.2" y="140" width="43.6" height="14" rx="3" class="c-mask"/>
-          <text x="430" y="150" class="t-muted" font-size="8" text-anchor="middle">Webhook</text>
+        <g data-detail="context" data-edge-from="browser" data-edge-to="maps" data-edge-label="iframe" data-edge-key="2" data-edge-id="iframe">
+          <rect x="115.6" y="416" width="38.8" height="14" rx="3" class="c-mask"/>
+          <text x="135" y="426" class="t-muted" font-size="8" text-anchor="middle">iframe</text>
         </g>
-        <g data-detail="context" data-edge-from="edge" data-edge-to="app" data-edge-label="反向代理 · 不緩衝" data-edge-key="4" data-edge-id="proxy">
-          <rect x="544.2" y="333" width="91.6" height="14" rx="3" class="c-mask"/>
-          <text x="590" y="343" class="t-backend" font-size="8" text-anchor="middle">反向代理 · 不緩衝</text>
+        <g data-detail="context" data-edge-from="edge" data-edge-to="app" data-edge-label="只放行 Cloudflare 來源" data-edge-key="3" data-edge-id="proxy">
+          <rect x="552.2" y="343" width="115.6" height="14" rx="3" class="c-mask"/>
+          <text x="610" y="353" class="t-backend" font-size="8" text-anchor="middle">只放行 Cloudflare 來源</text>
         </g>
-        <g data-detail="context" data-edge-from="app" data-edge-to="sqlite" data-edge-label="單一交易寫入" data-edge-key="5" data-edge-id="mutate">
-          <rect x="721.2" y="400" width="67.6" height="14" rx="3" class="c-mask"/>
-          <text x="755" y="410" class="t-backend" font-size="8" text-anchor="middle">單一交易寫入</text>
+        <g data-detail="context" data-edge-from="app" data-edge-to="db" data-edge-label="快照與 token" data-edge-key="4" data-edge-id="persist">
+          <rect x="766.2" y="416" width="67.6" height="14" rx="3" class="c-mask"/>
+          <text x="800" y="426" class="t-backend" font-size="8" text-anchor="middle">快照與 token</text>
         </g>
-        <g data-detail="context" data-edge-from="app" data-edge-to="agent" data-edge-label="文案生成" data-edge-key="6" data-edge-id="ai-copy">
-          <rect x="890.8" y="436.5" width="48.4" height="14" rx="3" class="c-mask"/>
-          <text x="915" y="446.5" class="t-muted" font-size="8" text-anchor="middle">文案生成</text>
+        <g data-detail="context" data-edge-from="app" data-edge-to="notion" data-edge-label="寫回（操作當下）" data-edge-key="5" data-edge-id="write-back">
+          <rect x="936.6" y="310" width="86.8" height="14" rx="3" class="c-mask"/>
+          <text x="980" y="320" class="t-backend" font-size="8" text-anchor="middle">寫回（操作當下）</text>
         </g>
-        <g data-detail="context" data-edge-from="app" data-edge-to="threads" data-edge-label="Graph API 發文" data-edge-key="7" data-edge-id="post">
-          <rect x="724.4" y="276" width="77.2" height="14" rx="3" class="c-mask"/>
-          <text x="763" y="286" class="t-muted" font-size="8" text-anchor="middle">Graph API 發文</text>
+        <g data-detail="context" data-edge-from="notion" data-edge-to="app" data-edge-label="輪詢拉回變更" data-edge-key="6" data-edge-id="poll">
+          <rect x="946.2" y="396" width="67.6" height="14" rx="3" class="c-mask"/>
+          <text x="980" y="406" class="t-messagebus" font-size="8" text-anchor="middle">輪詢拉回變更</text>
         </g>
-        <g data-detail="context" data-edge-from="app" data-edge-to="telegram" data-edge-label="通知" data-edge-key="8" data-edge-id="tg">
-          <rect x="900" y="199.5" width="30" height="14" rx="3" class="c-mask"/>
-          <text x="915" y="209.5" class="t-messagebus" font-size="8" text-anchor="middle">通知</text>
+        <g data-detail="context" data-edge-from="app" data-edge-to="notionimg" data-edge-label="串流下載" data-edge-key="7" data-edge-id="img">
+          <rect x="905.8" y="133" width="48.4" height="14" rx="3" class="c-mask"/>
+          <text x="930" y="143" class="t-muted" font-size="8" text-anchor="middle">串流下載</text>
+        </g>
+        <g data-detail="context" data-edge-from="app" data-edge-to="imgcache" data-edge-label="落檔不解碼" data-edge-key="8" data-edge-id="imgstore">
+          <rect x="611" y="396.5" width="58" height="14" rx="3" class="c-mask"/>
+          <text x="640" y="406.5" class="t-muted" font-size="8" text-anchor="middle">落檔不解碼</text>
         </g>
 
         <!-- Boundary labels (foreground masks keep routes out of titles) -->
-        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="region" data-composition-frame-label="GCP VM line-bot">
-          <rect data-graph-role="structural-frame-label-mask" x="314" y="300" width="91" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="318" y="313" class="t-cloud" font-size="9" font-weight="600">GCP VM line-bot</text>
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="region" data-composition-frame-label="GCP VM line-bot · 容器上限 64MB">
+          <rect data-graph-role="structural-frame-label-mask" x="304" y="310" width="177.4" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="308" y="323" class="t-cloud" font-size="9" font-weight="600">GCP VM line-bot · 容器上限 64MB</text>
         </g>
 
         <!-- Legend -->
@@ -5351,13 +5339,17 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
             <rect x="245" y="645" width="16" height="10" rx="2.5" class="c-database" stroke-width="1"/>
             <text x="267" y="654" class="t-muted" font-size="10" font-weight="500">Database</text>
           </g>
-          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Security" data-legend-x="350" data-legend-baseline="654" data-legend-width="83">
-            <rect x="350" y="645" width="16" height="10" rx="2.5" class="c-security" stroke-width="1"/>
-            <text x="372" y="654" class="t-muted" font-size="10" font-weight="500">Security</text>
+          <g data-legend-semantic-kind="cloud" data-legend-kind="cloud" data-legend-label="Cloud" data-legend-x="350" data-legend-baseline="654" data-legend-width="68">
+            <rect x="350" y="645" width="16" height="10" rx="2.5" class="c-cloud" stroke-width="1"/>
+            <text x="372" y="654" class="t-muted" font-size="10" font-weight="500">Cloud</text>
           </g>
-          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="External" data-legend-x="455" data-legend-baseline="654" data-legend-width="83">
-            <rect x="455" y="645" width="16" height="10" rx="2.5" class="c-external" stroke-width="1"/>
-            <text x="477" y="654" class="t-muted" font-size="10" font-weight="500">External</text>
+          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Security" data-legend-x="440" data-legend-baseline="654" data-legend-width="83">
+            <rect x="440" y="645" width="16" height="10" rx="2.5" class="c-security" stroke-width="1"/>
+            <text x="462" y="654" class="t-muted" font-size="10" font-weight="500">Security</text>
+          </g>
+          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="External" data-legend-x="545" data-legend-baseline="654" data-legend-width="83">
+            <rect x="545" y="645" width="16" height="10" rx="2.5" class="c-external" stroke-width="1"/>
+            <text x="567" y="654" class="t-muted" font-size="10" font-weight="500">External</text>
           </g>
         </g>
       </svg>
@@ -5549,36 +5541,36 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <div class="card">
         <div class="card-header">
           <div class="card-dot cyan"></div>
-          <h3>輪換與並發</h3>
+          <h3>兩個方向不對稱</h3>
         </div>
         <ul>
-          <li>&bull; 站位操作一律檢查 version、存 undo 快照、執行、version+1，同一交易完成</li>
-          <li>&bull; slots 以 UNIQUE(session_id, sp_id) 保證一人只在一處</li>
-          <li>&bull; 報名正取與候補在讀取時依 id 順序算出，單一寫入連線天然序列化，不需要鎖</li>
+          <li>&bull; 網頁改動在使用者操作當下寫回 Notion，成功才更新本地快照</li>
+          <li>&bull; Notion 端的變更靠輪詢，有人在看才每 30 秒查一次，變更用 SSE 推播</li>
+          <li>&bull; Notion 是唯一真相：下一輪同步會覆蓋任何本地未送出的差異</li>
         </ul>
       </div>
 
       <div class="card">
         <div class="card-header">
           <div class="card-dot emerald"></div>
-          <h3>多租戶與安全</h3>
+          <h3>Notion API 的限制</h3>
         </div>
         <ul>
-          <li>&bull; 所有查詢以 session 的 team_id 過濾，不信任前端傳來的 team_id</li>
-          <li>&bull; Session cookie 不落地：HMAC 帶球隊專屬 salt，停權或強制登出只要換 salt</li>
-          <li>&bull; LINE 由群組 id 解析所屬球隊，一群只屬一隊，綁定碼一次性</li>
+          <li>&bull; client 端限流 3 rps，429 讀 Retry-After 退避；POST 不重試避免重複建立頁面</li>
+          <li>&bull; 圖片網址約一小時過期，快照只存 block id，改走本站代理並限定來源網域</li>
+          <li>&bull; 排序一次發多筆 PATCH，全部成功才廣播快照，中途失敗就強制重新完整同步</li>
         </ul>
       </div>
 
       <div class="card">
         <div class="card-header">
           <div class="card-dot violet"></div>
-          <h3>AI 發文與回覆</h3>
+          <h3>64MB 記憶體內</h3>
         </div>
         <ul>
-          <li>&bull; 文案依 14 種情境現生，提示詞帶最近 5 篇成效與讀者留言，順著有人追問的方向寫</li>
-          <li>&bull; 草稿審核後可立即發或排程；發文前先鎖定並確認是否已發出，避免重複發文</li>
-          <li>&bull; 讀者留言由 AI 擬回覆進待回清單，預設人工審核才發，配額用完與發文共用同一個等待</li>
+          <li>&bull; 圖片串流落檔，不解碼不縮圖，同一張並發只下載一次</li>
+          <li>&bull; 內文預熱每筆間隔 400ms，把 API 額度讓給即時請求</li>
+          <li>&bull; GOMEMLIMIT 設 48MiB 讓 Go 提早 GC，而不是等容器被 OOM kill</li>
         </ul>
       </div>
     </div>

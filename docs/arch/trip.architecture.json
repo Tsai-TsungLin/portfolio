@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Notion 旅遊行程同步",
+    "quality_profile": "showcase",
+    "visual_preset": "editorial",
+    "viewBox": [
+      1300,
+      670
+    ],
+    "views": [
+      {
+        "id": "write",
+        "label": "網頁改動寫回 Notion",
+        "focus": [
+          "browser",
+          "edge",
+          "app",
+          "notion"
+        ],
+        "note": "使用者操作當下即時寫回，成功後才更新本地快照。"
+      },
+      {
+        "id": "read",
+        "label": "Notion 變更回到網頁",
+        "focus": [
+          "notion",
+          "app",
+          "db",
+          "browser"
+        ],
+        "note": "有人在看才輪詢，抓到變更用 SSE 推給所有開著的人。"
+      },
+      {
+        "id": "images",
+        "label": "圖片代理",
+        "focus": [
+          "browser",
+          "app",
+          "imgcache",
+          "notionimg"
+        ],
+        "note": "Notion 圖片網址約一小時過期，一律改走本站代理與磁碟快取。"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "admin",
+      "type": "frontend",
+      "label": "後台",
+      "sublabel": "產生連結 · HMAC session",
+      "pos": [
+        40,
+        120
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "browser",
+      "type": "frontend",
+      "label": "行程頁",
+      "sublabel": "唯讀 / 編輯分享連結",
+      "pos": [
+        40,
+        330
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "maps",
+      "type": "external",
+      "label": "Google 我的地圖",
+      "sublabel": "iframe 延遲載入",
+      "pos": [
+        40,
+        510
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "edge",
+      "type": "security",
+      "label": "Cloudflare + nginx",
+      "sublabel": "trip.relexes.com",
+      "pos": [
+        330,
+        330
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "imgcache",
+      "type": "cloud",
+      "label": "圖片磁碟快取",
+      "sublabel": "volume trip_data",
+      "pos": [
+        330,
+        510
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "app",
+      "type": "backend",
+      "label": "trip-app",
+      "sublabel": "Go 單一 binary · 內嵌靜態頁",
+      "pos": [
+        700,
+        330
+      ],
+      "size": [
+        200,
+        66
+      ]
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "SQLite",
+      "sublabel": "快照 · token · 內文快取",
+      "pos": [
+        700,
+        510
+      ],
+      "size": [
+        200,
+        66
+      ]
+    },
+    {
+      "id": "notionimg",
+      "type": "external",
+      "label": "Notion 圖片主機",
+      "sublabel": "網址約一小時過期",
+      "pos": [
+        1060,
+        120
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "notion",
+      "type": "external",
+      "label": "Notion API",
+      "sublabel": "行程資料的真相來源",
+      "pos": [
+        1060,
+        330
+      ],
+      "size": [
+        190,
+        66
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "GCP VM line-bot · 容器上限 64MB",
+      "wraps": [
+        "edge",
+        "imgcache",
+        "app",
+        "db"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "view",
+      "from": "browser",
+      "to": "edge",
+      "label": "HTTPS · SSE",
+      "variant": "emphasis"
+    },
+    {
+      "id": "admin-in",
+      "from": "admin",
+      "to": "edge",
+      "label": "後台 API",
+      "fromSide": "right",
+      "toSide": "top",
+      "via": [
+        [
+          425,
+          153
+        ]
+      ]
+    },
+    {
+      "id": "iframe",
+      "from": "browser",
+      "to": "maps",
+      "label": "iframe",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 40
+    },
+    {
+      "id": "proxy",
+      "from": "edge",
+      "to": "app",
+      "label": "只放行 Cloudflare 來源",
+      "variant": "emphasis"
+    },
+    {
+      "id": "persist",
+      "from": "app",
+      "to": "db",
+      "label": "快照與 token",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 40
+    },
+    {
+      "id": "write-back",
+      "from": "app",
+      "to": "notion",
+      "label": "寫回（操作當下）",
+      "variant": "emphasis",
+      "labelDy": -40
+    },
+    {
+      "id": "poll",
+      "from": "notion",
+      "to": "app",
+      "label": "輪詢拉回變更",
+      "variant": "dashed",
+      "labelDy": 60
+    },
+    {
+      "id": "img",
+      "from": "app",
+      "to": "notionimg",
+      "label": "串流下載",
+      "fromSide": "top",
+      "toSide": "left",
+      "via": [
+        [
+          800,
+          153
+        ]
+      ]
+    },
+    {
+      "id": "imgstore",
+      "from": "app",
+      "to": "imgcache",
+      "label": "落檔不解碼",
+      "fromSide": "left",
+      "toSide": "top",
+      "via": [
+        [
+          640,
+          363
+        ],
+        [
+          640,
+          470
+        ],
+        [
+          425,
+          470
+        ]
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "兩個方向不對稱",
+      "items": [
+        "網頁改動在使用者操作當下寫回 Notion，成功才更新本地快照",
+        "Notion 端的變更靠輪詢，有人在看才每 30 秒查一次，變更用 SSE 推播",
+        "Notion 是唯一真相：下一輪同步會覆蓋任何本地未送出的差異"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Notion API 的限制",
+      "items": [
+        "client 端限流 3 rps，429 讀 Retry-After 退避；POST 不重試避免重複建立頁面",
+        "圖片網址約一小時過期，快照只存 block id，改走本站代理並限定來源網域",
+        "排序一次發多筆 PATCH，全部成功才廣播快照，中途失敗就強制重新完整同步"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "64MB 記憶體內",
+      "items": [
+        "圖片串流落檔，不解碼不縮圖，同一張並發只下載一次",
+        "內文預熱每筆間隔 400ms，把 API 額度讓給即時請求",
+        "GOMEMLIMIT 設 48MiB 讓 Go 提早 GC，而不是等容器被 OOM kill"
+      ]
+    }
+  ]
+}
