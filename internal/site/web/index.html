@@ -46,7 +46,7 @@
 <main class="content">
 
 <section class="sec" id="work">
-  <div class="sec-head"><h2>Work <b>· 10 個專案</b></h2>
+  <div class="sec-head"><h2>Work <b>· 11 個專案</b></h2>
     <div class="chips" id="chips" role="group" aria-label="作品分類"><button class="chip" aria-pressed="true" data-filter="all">全部</button><button class="chip" aria-pressed="false" data-filter="product">商業產品</button><button class="chip" aria-pressed="false" data-filter="data">資料與交易</button><button class="chip" aria-pressed="false" data-filter="infra">自動化與基礎設施</button></div>
   </div>
   <p class="sec-lead rise">全部都是自己從需求、設計、開發到部署維運完成的專案。點「細節」看做了哪些事。</p>
@@ -77,6 +77,15 @@
     <ul class="tags"><li>Go</li><li>Flutter</li><li>PostgreSQL</li><li>PostGIS</li><li>pgvector</li><li>Python</li><li>React</li></ul>
     <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
     <div class="card-detail"><ul><li>後端 Handler → Service → Repository 分層；OTP / Google / Apple 登入、JWT、限流</li><li>Python AI 微服務做圖像特徵向量，pgvector 相似度比對、PostGIS 地理範圍查詢</li><li>MinIO 物件儲存、Redis、Firebase 推播；Docker Compose 部署到 GCP VM</li><li>走過 App Store / Google Play 上架與審查流程（測試帳號、封閉測試、簽章指紋）</li></ul><p class="card-role">角色：後端、Flutter App、管理後台、上架流程 · <a href="arch/shiguang.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">互動式架構圖 →</a></p></div></div>
+  </article>
+
+  <article class="row rise" data-cat="product">
+    <figure class="card-img"><picture><source srcset="assets/kuankuana.webp" type="image/webp"><img src="assets/kuankuana.jpg" alt="款款欸手機版：首頁與行李清單勾選畫面" width="880" height="495" loading="lazy"></picture></figure>
+    <div><span class="card-cat">清單 · PWA</span><h3>款款欸 行李小助手 <span class="badge live">上線中</span><small>旅行行李清單，不登入就能用</small></h3>
+    <p class="card-sum">出門前總是漏帶東西，帶什麼永遠靠回想。做成手機優先的網站：選國內或國外就給一份公版清單，逐項勾選、加自己的東西，完成後下載 PDF 帶著走。不登入也能用，LINE 或 Google 登入後清單跟著人走。</p>
+    <ul class="tags"><li>Go</li><li>SQLite</li><li>原生 JS</li><li>PWA</li><li>LINE / Google 登入</li><li>Threads API</li></ul>
+    <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
+    <div class="card-detail"><ul><li>訪客的清單先存在這台裝置，登入時才匯入帳號；待同步的修改要伺服器確認過身分才送，被退回的不丟掉並在卡片上標示只存在這台裝置</li><li>自訂物品與公版同名時合併成一列，額度以「種」計算、跨清單取聯集；付費專區由伺服器把關，未擁有者在 API 就拿不到內容</li><li>後台統計改成增量彙總：撈事件、寫統計表、推進游標在同一個交易，總覽走行程內快取與啟動預熱</li><li>跨瀏覽器登入交接：在另一個瀏覽器完成授權時，用四位配對碼把登入狀態交回原本那台</li><li>Threads 排程發文、抓成效與留言，AI 只擬稿不自動送出；發文前先查同一帳號有沒有同樣正文</li></ul><p class="card-role">角色：產品設計、前後端、後台、上線與營運 · <a href="arch/kuankuana.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">互動式架構圖 →</a></p></div></div>
   </article>
 
   <article class="row rise" data-cat="data">

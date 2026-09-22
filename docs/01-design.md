@@ -64,6 +64,7 @@ HTML / CSS / JS 一律 `no-cache`，只有 `/assets/` 底下的圖片快取一�
 | `arch/badminton.html` | `docs/arch/badminton.architecture.json` | architecture |
 | `arch/taiex.html` | `docs/arch/taiex.sequence.json` | sequence |
 | `arch/trip.html` | `docs/arch/trip.architecture.json` | architecture |
+| `arch/kuankuana.html` | `docs/arch/kuankuana.architecture.json` | architecture |
 
 ```bash
 A=~/.agents/skills/archify/bin/archify.mjs   # <type> 為 architecture 或 sequence

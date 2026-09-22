@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "款款欸 行李小助手",
+    "quality_profile": "showcase",
+    "visual_preset": "editorial",
+    "viewBox": [
+      1320,
+      630
+    ],
+    "views": [
+      {
+        "id": "use",
+        "label": "訪客到登入",
+        "focus": [
+          "browser",
+          "edge",
+          "app",
+          "db"
+        ],
+        "note": "不登入就能用，登入後把這台裝置的清單匯入帳號，之後跨裝置同步。"
+      },
+      {
+        "id": "login",
+        "label": "OAuth 登入",
+        "focus": [
+          "browser",
+          "oauth",
+          "edge",
+          "app"
+        ],
+        "note": "授權在使用者自己的瀏覽器發生，callback 回到服務端才換 token。"
+      },
+      {
+        "id": "social",
+        "label": "社群與 AI",
+        "focus": [
+          "app",
+          "worker",
+          "threads",
+          "agent"
+        ],
+        "note": "發文與留言回覆由背景 worker 排程，AI 只擬稿、不自動送出。"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "admin",
+      "type": "frontend",
+      "label": "後台",
+      "sublabel": "公版清單 · 統計 · 回饋",
+      "pos": [
+        40,
+        110
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "browser",
+      "type": "frontend",
+      "label": "行李清單頁",
+      "sublabel": "原生 JS · 可加到主畫面",
+      "pos": [
+        40,
+        300
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "oauth",
+      "type": "external",
+      "label": "LINE / Google",
+      "sublabel": "只要識別，不要 email",
+      "pos": [
+        40,
+        470
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "edge",
+      "type": "security",
+      "label": "Cloudflare + nginx",
+      "sublabel": "kuankuaneh.relexes.com",
+      "pos": [
+        330,
+        300
+      ],
+      "size": [
+        190,
+        66
+      ]
+    },
+    {
+      "id": "worker",
+      "type": "backend",
+      "label": "背景 worker",
+      "sublabel": "統計彙總 · Threads 排程",
+      "pos": [
+        700,
+        110
+      ],
+      "size": [
+        200,
+        66
+      ]
+    },
+    {
+      "id": "app",
+      "type": "backend",
+      "label": "kuankuana-app",
+      "sublabel": "Go 單一 binary · 內嵌靜態頁",
+      "pos": [
+        700,
+        300
+      ],
+      "size": [
+        200,
+        66
+      ]
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "SQLite（WAL）",
+      "sublabel": "清單 · 事件 · 統計表",
+      "pos": [
+        700,
+        470
+      ],
+      "size": [
+        200,
+        66
+      ]
+    },
+    {
+      "id": "threads",
+      "type": "external",
+      "label": "Threads API",
+      "sublabel": "發文 · 成效 · 留言",
+      "pos": [
+        1070,
+        110
+      ],
+      "size": [
+        200,
+        66
+      ]
+    },
+    {
+      "id": "agent",
+      "type": "cloud",
+      "label": "共用 AI 服務",
+      "sublabel": "同機 lexnet 內部呼叫",
+      "pos": [
+        1070,
+        300
+      ],
+      "size": [
+        200,
+        66
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "GCP VM line-bot · 容器上限 128MB",
+      "wraps": [
+        "edge",
+        "worker",
+        "app",
+        "db"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "view",
+      "from": "browser",
+      "to": "edge",
+      "label": "HTTPS",
+      "variant": "emphasis"
+    },
+    {
+      "id": "admin-in",
+      "from": "admin",
+      "to": "edge",
+      "label": "後台 API",
+      "fromSide": "right",
+      "toSide": "top",
+      "via": [
+        [
+          425,
+          143
+        ]
+      ]
+    },
+    {
+      "id": "login",
+      "from": "browser",
+      "to": "oauth",
+      "label": "導去授權",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 40
+    },
+    {
+      "id": "callback",
+      "from": "oauth",
+      "to": "edge",
+      "label": "callback 帶回 code",
+      "fromSide": "right",
+      "toSide": "bottom",
+      "via": [
+        [
+          425,
+          503
+        ]
+      ]
+    },
+    {
+      "id": "proxy",
+      "from": "edge",
+      "to": "app",
+      "label": "只放行 Cloudflare 來源",
+      "variant": "emphasis"
+    },
+    {
+      "id": "persist",
+      "from": "app",
+      "to": "db",
+      "label": "清單 · 事件 · 統計表",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 40
+    },
+    {
+      "id": "bg",
+      "from": "app",
+      "to": "worker",
+      "label": "背景工作有人接住 panic",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelDy": -40
+    },
+    {
+      "id": "publish",
+      "from": "worker",
+      "to": "threads",
+      "label": "排程發文 · 抓成效與留言"
+    },
+    {
+      "id": "ai",
+      "from": "app",
+      "to": "agent",
+      "label": "AI 擬稿（只擬不送）",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "不登入也能用",
+      "items": [
+        "訪客的清單先存在這台裝置，登入時把這台的清單匯入帳號，之後才跨裝置同步",
+        "待同步的修改要伺服器確認過身分才送；被退回的不丟掉，在卡片上標示只存在這台裝置",
+        "在另一個瀏覽器完成授權時，用四位配對碼把登入狀態交回原本那台"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "付費專區由伺服器把關",
+      "items": [
+        "未擁有者在清單 API 就拿不到內容，不靠前端隱藏",
+        "回應因人而異，快取只能 private no-cache 加 ETag，不可以進共用快取",
+        "自訂物品與公版同名時合併成一列，額度以「種」計算、跨清單取聯集"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "統計不漏不重",
+      "items": [
+        "事件先落地，背景 worker 增量彙總：撈事件、寫統計表、推進游標在同一個交易",
+        "游標靠 rowid，所以事件表不清空、這顆資料庫也不跑 VACUUM",
+        "後台總覽走行程內快取與啟動預熱；關機的每一步都有時間上限"
+      ]
+    }
+  ]
+}
