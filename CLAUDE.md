@@ -33,3 +33,4 @@ go build ./... && go vet ./... && go test -race ./...
 - 部署後要在 lex-console 的 `services.yaml` 登記這個服務，並更新 `../.claude/rules/infra.md` 的容器表與網域表
 - 機型、埠號、容器名、`mem_limit`、Cloudflare 設定一律寫「見 `../.claude/rules/infra.md`」，不在這個 repo 複製數字
 - 發版時只做三件事：`CHANGELOG.md` 加一段、`docs/PROGRESS.md` 對應需求列填上線日期、發版紀錄加一行
+- **新增作品卡片或改履歷頁後，同一輪要提醒站長把 104／Cake／LinkedIn 三站的履歷一起補上**，不能只改網站；做法與各站要填哪裡見 `02-deploy.md` §5

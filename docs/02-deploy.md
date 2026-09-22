@@ -2,7 +2,7 @@
 
 建置、部署、nginx 與履歷 PDF。機型、埠號、容器名、`mem_limit`、Cloudflare 設定一律見 `../../.claude/rules/infra.md`，這裡不複製數字。
 
-目錄：§1 建置與部署 · §2 nginx 與網域 · §3 履歷 PDF · §4 部署後確認
+目錄：§1 建置與部署 · §2 nginx 與網域 · §3 履歷 PDF · §4 部署後確認 · §5 履歷同步到 104／Cake／LinkedIn
 
 ## §1 建置與部署
 
@@ -52,3 +52,16 @@ deploy.sh 跑完不等於成功，要自己確認三件事：
 1. `curl -s localhost:<對外埠>/health` 回 `ok`、`docker ps` 看到容器 running（容器名與埠號見 `../../.claude/rules/infra.md`）。
 2. 瀏覽器實際開 `https://relexes.com/`、`/resume.html`、`/architecture.html` 與任一張架構圖，看畫面與 console 沒有錯誤。
 3. lex-console 的 `services.yaml` 有這個服務且探測是綠的。
+
+## §5 履歷同步到 104／Cake／LinkedIn
+
+網站加了新作品或履歷頁有改，三個求職站要跟著補，不然對外的履歷會少一個專案。站長自己登入，Claude 在已登入的分頁填入、站長按儲存；不交帳密、不用機器登入（LinkedIn 禁自動化、104／Cake 有驗證碼）。
+
+| 站 | 加在哪 | 內容來源 |
+|---|---|---|
+| 104 | 「專案成就」新增一筆（名稱、起始年月、仍在進行、說明、連結）；「自傳」中英文兩段的個人專案列舉也補一句 | 首頁卡片的 `card-sum` 與 `card-detail`、履歷頁 `resume.html` 那一筆 |
+| Cake | 履歷編輯器「專案 / 作品集 N」接在最後一筆後面（名稱、期間、描述、連結）；「自我介紹」第二段的專案列舉補一句；改完要按「發布」，只存草稿對外看不到 | 同上，格式照前一筆 |
+| LinkedIn | 新增專案表單 `/in/lextsai/edit/forms/project/new/`：英文名稱、Description（含連結）、Currently working、起始年月 | 履歷頁的 English Summary 語氣改寫 |
+
+順序：先改網站（卡片、履歷頁、架構圖）→ 部署 → 再同步三站，文案才有單一來源。做完在 `PROGRESS.md` 該作品那列備註「三站已同步 + 日期」。
+
