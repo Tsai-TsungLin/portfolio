@@ -3,3 +3,4 @@
 graphify-out/
 docs/adr/
 .DS_Store
+.claude/worktrees/
