@@ -94,7 +94,7 @@
     <p class="card-sum">定時掃描各聯盟盤口，異動時推播 LINE；Web Dashboard 提供賽程、比分、逐局、投注紀錄，並用 AI 做賽前分析、賽後復盤與週報。</p>
     <ul class="tags"><li>Go</li><li>PostgreSQL</li><li>Redis</li><li>React</li><li>LINE Bot</li><li>Claude</li></ul>
     <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
-    <div class="card-detail"><ul><li>從單一 NBA 擴充到三個聯盟，各自的資料源、市場類型（獨贏 / 讓分 / 前五局）統一在同一套資料模型</li><li>排程掃描外部 API，Redis 去重避免重複推播；台灣時區與美國賽日的日期偏移處理</li><li>AI 分析走自建的共用 AI 服務，容器內不裝 CLI，記憶體上限壓在 256MB</li><li>React 前端與另一個交易系統共用自建元件庫，本機建置後上傳，VM 不跑 node</li></ul><p class="card-role">角色：後端、前端、排程、部署 · <a href="arch/scannba.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">互動式架構圖 →</a></p></div></div>
+    <div class="card-detail"><ul><li>從單一 NBA 擴充到三個聯盟，各自的資料源、市場類型（獨贏 / 讓分 / 前五局）統一在同一套資料模型</li><li>排程掃描外部 API，Redis 去重避免重複推播；台灣時區與美國賽日的日期偏移處理</li><li>AI 分析走自建的共用 AI 服務，容器內不裝 CLI，記憶體上限壓在 256MB</li><li>AI 推薦改為模型只輸出機率、由程式依後台門檻決策；建立賽前情境特徵表與回測評估工具</li><li>React 前端本機建置後上傳，VM 不跑 node</li></ul><p class="card-role">角色：後端、前端、排程、部署 · <a href="arch/scannba.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">互動式架構圖 →</a></p></div></div>
   </article>
 
   <article class="row rise" data-cat="data">
@@ -126,20 +126,20 @@
 
   <article class="row rise" data-cat="infra">
     <figure class="card-img"><picture><source srcset="assets/agent.webp" type="image/webp"><img src="assets/agent.jpg" alt="共用 AI 服務架構示意圖" width="880" height="495" loading="lazy"></picture></figure>
-    <div><span class="card-cat">內部服務 · AI</span><h3>共用 AI 服務 <span class="badge live">上線中</span><small>把 CLI 包成 HTTP，各專案共用同一份配額</small></h3>
-    <p class="card-sum">多個專案都要用 AI，但配額只有一份。做一個內部服務把 Claude CLI 包成 HTTP API，管併發、排隊、記錄每次呼叫與用量，各專案透過共用網路呼叫。</p>
-    <ul class="tags"><li>Go</li><li>SQLite</li><li>Docker network</li><li>併發控制</li></ul>
+    <div><span class="card-cat">內部服務 · AI</span><h3>共用 AI 服務 <span class="badge live">上線中</span><small>LLM 閘道、跨服務追蹤與 MCP 工具箱</small></h3>
+    <p class="card-sum">多個專案都要用 AI，但配額只有一份。做一個內部服務把 Claude CLI 包成 HTTP API，管併發、排隊、每個呼叫端的每日 token 上限與成本，記錄每次呼叫；5 個服務共用，一個 trace_id 就能從呼叫端追到 AI 那一段。</p>
+    <ul class="tags"><li>Go</li><li>SQLite</li><li>OpenTelemetry</li><li>MCP</li><li>併發控制</li></ul>
     <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
-    <div class="card-detail"><ul><li>併發上限與記憶體上限綁在一起算：單次峰值 × 併發數要留在容器 mem_limit 內</li><li>滿載時新請求先排隊 60 秒再回 429，呼叫端的 timeout 必須把這段含進去</li><li>後台可看配額剩餘與完整呼叫紀錄；跨 compose 專案走共用 external network</li></ul><p class="card-role">角色：設計、後端、後台、容量規劃</p></div></div>
+    <div class="card-detail"><ul><li>併發上限與記憶體上限綁在一起算：單次峰值 × 併發數要留在容器 mem_limit 內</li><li>滿載時新請求先排隊 60 秒再回 429，呼叫端的 timeout 必須把這段含進去</li><li>後台可看配額剩餘與完整呼叫紀錄；跨 compose 專案走共用 external network</li><li>支援 CLI 與 Messages API 兩種 provider；每個呼叫端每日 token 上限、依單價表估成本、後台每日成本圖</li><li>抽出共用 OpenTelemetry 套件（Go module 發版號給呼叫端升級），呼叫端帶 traceparent，span 寫成 logfmt 進既有 Loki，不另架 Tempo</li><li>MCP 工具箱：把各服務的唯讀查詢包成 11 個 MCP 工具，給 Claude Code 與聊天助理使用；Cloudflare Access 加 bearer 雙重認證</li></ul><p class="card-role">角色：設計、後端、後台、容量規劃、可觀測性</p></div></div>
   </article>
 
   <article class="row rise" data-cat="infra">
     <figure class="card-img"><picture><source srcset="assets/console.webp" type="image/webp"><img src="assets/console.jpg" alt="總控台服務狀態示意圖" width="880" height="495" loading="lazy"></picture></figure>
     <div><span class="card-cat">監控 · Log</span><h3>總控台與集中式 Log <span class="badge live">上線中</span><small>一頁看完所有服務的健康狀態與今日錯誤</small></h3>
-    <p class="card-sum">十幾個服務跑在同一台 VM，需要一眼看出誰出事。Loki + Alloy + Grafana 集中收 log，再做一個總控台探測各服務健康、列出今日錯誤與事件時間軸。</p>
-    <ul class="tags"><li>Go</li><li>Loki</li><li>Alloy</li><li>Grafana</li><li>LogQL</li><li>SQLite</li></ul>
+    <p class="card-sum">十幾個服務跑在同一台 VM，需要一眼看出誰出事。Loki + Alloy + Grafana 集中收 log，再做一個總控台探測各服務健康、列出今日錯誤與事件時間軸；出事時由 AI 故障分診先查事實、給建議，人按確認才動手。</p>
+    <ul class="tags"><li>Go</li><li>Loki</li><li>Grafana</li><li>LogQL</li><li>SQLite</li><li>AI agent</li></ul>
     <button class="card-more" type="button" aria-haspopup="dialog">細節 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
-    <div class="card-detail"><ul><li>探測一律打容器內部位址，連續失敗達門檻才算異常，避免單次逾時造成假警報</li><li>Loki 查詢加 5 分鐘快取；level 標籤大小寫混雜要不分大小寫比對</li><li>自己收 log 的 collector 唯讀掛 docker.sock，收哪些容器寫死在程式裡，不接受外部輸入</li><li>與 Loki 並行收集比對筆數一週，一致才切換，切換過程不能有 log 空窗</li></ul><p class="card-role">角色：監控架構、後端、維運</p></div></div>
+    <div class="card-detail"><ul><li>探測一律打容器內部位址，連續失敗達門檻才算異常，避免單次逾時造成假警報</li><li>Loki 查詢加 5 分鐘快取；level 標籤大小寫混雜要不分大小寫比對</li><li>自己收 log 的 collector 唯讀掛 docker.sock，收哪些容器寫死在程式裡，不接受外部輸入</li><li>與 Loki 並行收集比對筆數一週，一致才切換，切換過程不能有 log 空窗</li><li>AI 故障分診：服務變紅或錯誤暴增時自動觸發，蒐集者用唯讀工具查事實（tool calling 迴圈）、診斷者給建議；每次有 token 預算、事件去重、逐步紀錄</li><li>建議重啟時只走白名單，Telegram 或網頁按「做」才執行；模型會在 JSON 後自己編工具結果，解析只取第一個物件並有測試</li></ul><p class="card-role">角色：監控架構、後端、AI agent、維運</p></div></div>
   </article>
 
   <article class="row rise" data-cat="infra">
