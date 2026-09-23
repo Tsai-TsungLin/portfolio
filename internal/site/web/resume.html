@@ -50,7 +50,7 @@
 
     <section>
       <h2>摘要</h2>
-      <p class="summary">五年 Go 後端工程師，經歷監控代理產品、遊戲與線上娛樂平台微服務、金流與 P2P 交易、資料層遷移等領域，能獨立從零初始化服務、設計資料表與 API、處理併發與穩定性問題；做過千萬筆等級資料的測試與效能優化，關鍵查詢從 3 秒縮到 50 毫秒。同時以個人專案完成夜市飲料 POS、羽球輪換系統等實際上線且有人在用的產品，涵蓋前端、後端、硬體串接與部署維運。轉職前有三年技術客服與資料對帳經驗，習慣從業務與資料兩個視角看系統。</p>
+      <p class="summary">五年 Go 後端工程師，經歷監控代理產品、遊戲與線上娛樂平台微服務、金流與 P2P 交易、資料層遷移等領域，能獨立從零初始化服務、設計資料表與 API、處理併發與穩定性問題；做過千萬筆等級資料的測試與效能優化，關鍵查詢從 3 秒縮到 50 毫秒。同時以個人專案完成夜市飲料 POS、羽球輪換系統等實際上線且有人在用的產品，涵蓋前端、後端、硬體串接與部署維運。近期專注 LLM 應用工程：自建共用 AI 閘道（配額、成本上限、呼叫紀錄）、跨服務 OpenTelemetry 追蹤、具工具呼叫與人工確認的故障分診 agent，以及 MCP server，全部在線上運行。轉職前有三年技術客服與資料對帳經驗，習慣從業務與資料兩個視角看系統。</p>
     </section>
 
     <section>
@@ -138,6 +138,10 @@
     <section>
       <h2>個人專案（皆已上線或運行中）</h2>
       <div class="entry">
+        <span class="when">2026/9 — 現在<br>Go · Claude · OpenTelemetry · MCP</span>
+        <div><h3>AI 應用平台 <small>· 5 個服務共用</small></h3><ul><li>共用 LLM 閘道：把 Claude 包成內部 HTTP 服務，支援 CLI 與 Messages API 兩種 provider；每個呼叫端每日 token 上限、成本估算、完整呼叫紀錄與後台</li><li>跨服務追蹤：抽出共用 OpenTelemetry 套件（module 版號管理），呼叫端帶 traceparent，一個 trace_id 在 Loki 串起整段；span 寫成 logfmt 進既有 log 管線，不另架 Tempo</li><li>故障分診 agent：服務變紅或錯誤暴增時自動觸發，蒐集者以唯讀工具查事實（tool calling 迴圈）、診斷者給建議；每次有 token 預算、事件去重、逐步紀錄；建議重啟只走白名單，Telegram／網頁按鈕人工確認才執行；防模型在 JSON 後編造工具結果並有測試</li><li>MCP server：把各服務的唯讀查詢包成 11 個 MCP 工具，給 Claude Code 與聊天助理使用；Cloudflare Access Service Token 加 bearer 雙重認證</li></ul></div>
+      </div>
+      <div class="entry">
         <span class="when">2024/8 — 現在<br>Go · SQLite · 樹莓派</span>
         <div><h3>夜市飲料餐車 POS <small>· 3 家攤商使用中</small></h3><ul><li>iPad 瀏覽器點餐、樹莓派直驅出單機（ESC/POS）與貼紙機（TSPL），離線優先、斷電不掉單、有網路時同步雲端；雲端多分店報表、線上更新菜單、OTA 更新</li></ul></div>
       </div>
@@ -147,7 +151,7 @@
       </div>
       <div class="entry">
         <span class="when">2022/1 — 現在<br>Go · PostgreSQL · React</span>
-        <div><h3>多聯盟盤口與賽事系統</h3><ul><li>NBA / MLB / KBO 盤口異動 LINE 推播、Dashboard、投注紀錄與 AI 分析復盤週報</li></ul></div>
+        <div><h3>多聯盟盤口與賽事系統</h3><ul><li>NBA / MLB / KBO 盤口異動 LINE 推播、Dashboard、投注紀錄與 AI 分析復盤週報；AI 推薦改為模型只輸出機率、由程式依門檻決策，並建立賽前情境特徵表與回測評估工具</li></ul></div>
       </div>
       <div class="entry">
         <span class="when">2026/3 — 現在<br>Go · Python · React</span>
@@ -180,6 +184,7 @@
         <div><b>訊息佇列</b><span>RabbitMQ、NSQ、Redis Queue / PubSub；事件驅動重構、併發安全、資源洩漏排查</span></div>
         <div><b>基礎設施</b><span>Docker Compose、Kubernetes、Helm、GCP、nginx、Cloudflare、Let's Encrypt、GitLab CI / Drone、Loki / Grafana / Prometheus、Tailscale</span></div>
         <div><b>前端 / App</b><span>React、Vue 3、Flutter、原生 HTML / CSS / JS；App Store / Google Play 上架</span></div>
+        <div><b>AI 應用</b><span>LLM 閘道與成本控管、Tool calling／Agent 迴圈、Human-in-the-loop、MCP server、OpenTelemetry 分散式追蹤、pgvector 向量檢索</span></div>
         <div><b>整合</b><span>LINE Messaging API、Telegram Bot、Google Calendar / OAuth、OpenAI / Claude API、金流 Webhook、券商 API、ESC/POS / TSPL 印表機</span></div>
         <div><b>資料分析</b><span>BigQuery、LookerStudio、Google Sheets；Excel（VLOOKUP / XLOOKUP / INDEX+MATCH / SUMIFS / COUNTIFS / IFS / IFERROR / 樞紐分析表 / 條件式格式 / 資料驗證 / VBA 巨集）</span></div>
       </div>
@@ -187,7 +192,7 @@
 
     <section>
       <h2>Summary (English)</h2>
-      <p class="summary">Backend engineer with five years of Go, across monitoring agents, online gaming and entertainment platforms, payment and P2P trading systems, and data-layer migrations. Bootstraps services from scratch, designs schemas and APIs, and fixes concurrency and stability issues (data races, resource leaks, SQL injection). Tuned queries on tens of millions of rows from 3 s to 50 ms. Also ships side projects that people actually use: a night-market drink POS on Raspberry Pi, a badminton court rotation SaaS, and a multi-league odds dashboard. Three years of technical support before engineering give a business and data perspective. Based in Taichung, open to remote.</p>
+      <p class="summary">Backend engineer with five years of Go, across monitoring agents, online gaming and entertainment platforms, payment and P2P trading systems, and data-layer migrations. Bootstraps services from scratch, designs schemas and APIs, and fixes concurrency and stability issues (data races, resource leaks, SQL injection). Tuned queries on tens of millions of rows from 3 s to 50 ms. Also ships side projects that people actually use: a night-market drink POS on Raspberry Pi, a badminton court rotation SaaS, and a multi-league odds dashboard. Recently focused on applied LLM engineering: a shared AI gateway with quotas, cost caps and call logs, cross-service OpenTelemetry tracing, a tool-calling incident-triage agent with human approval before any action, and an MCP server, all running in production. Three years of technical support before engineering give a business and data perspective. Based in Taichung, open to remote.</p>
     </section>
 
     <section>
