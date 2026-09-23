@@ -5,7 +5,13 @@
 
 ## 未發版
 
-（無）
+使用者看得到的：—
+
+站長的後台：—
+
+內部與文件：
+
+- 新增 GitHub Actions 部署（`deploy` workflow）：手動觸發、只部署 master 上的 commit，經 VM 守門腳本放檔重啟；本機 `deploy.sh` 保留
 
 ## 2026-09-23
 

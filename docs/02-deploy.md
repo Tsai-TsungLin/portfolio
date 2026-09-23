@@ -2,7 +2,7 @@
 
 建置、部署、nginx 與履歷 PDF。機型、埠號、容器名、`mem_limit`、Cloudflare 設定一律見 `../../.claude/rules/infra.md`，這裡不複製數字。
 
-目錄：§1 建置與部署 · §2 nginx 與網域 · §3 履歷 PDF · §4 部署後確認 · §5 履歷同步到 104／Cake／LinkedIn
+目錄：§1 建置與部署 · §2 nginx 與網域 · §3 履歷 PDF · §4 部署後確認 · §5 履歷同步到 104／Cake／LinkedIn · §6 GitHub Actions 部署
 
 ## §1 建置與部署
 
@@ -16,6 +16,7 @@ bash scripts/deploy.sh > /tmp/deploy-portfolio.log 2>&1 &   # 耗時，一律背
 - `deploy/docker-compose.yml` 的 `name: portfolio` 不可拿掉：各服務的 compose 都放在自己的 `deploy/` 底下，沒設 `name` 會全部叫 `deploy` 互相頂掉（見 `infra.md`）。
 - 容器只綁 loopback，對外經主機 nginx；同時掛 `lexnet` 讓 lex-console 探得到 `/health`。
 - 腳本只部署容器，nginx 切換是另一件事（見 §2）。
+- 另一條路是 GitHub Actions 的 `deploy` workflow（§6），不需要本機；兩條路部署的結果相同。
 
 ## §2 nginx 與網域
 
@@ -64,4 +65,13 @@ deploy.sh 跑完不等於成功，要自己確認三件事：
 | LinkedIn | 新增專案表單 `/in/lextsai/edit/forms/project/new/`：英文名稱、Description（含連結）、Currently working、起始年月 | 履歷頁的 English Summary 語氣改寫 |
 
 順序：先改網站（卡片、履歷頁、架構圖）→ 部署 → 再同步三站，文案才有單一來源。做完在 `PROGRESS.md` 該作品那列備註「三站已同步 + 日期」。
+
+## §6 GitHub Actions 部署
+
+`.github/workflows/deploy.yml` 以 `workflow_dispatch` 觸發，輸入要部署的 commit（完整 40 碼，必須已在 master 上）：測試 → 交叉編譯 → 把 `portfolio`、`Dockerfile`、`docker-compose.yml` 打成 tar 經 SSH 送給 VM 上的守門腳本（lex repo `ops/deploy-gate.sh`）→ 腳本放檔、`docker compose up -d --build`、打 `/health`，把 commit 寫進 VM 部署目錄的 `.deployed-sha`。
+
+- 平常由 lex-console 發現 master 有新 commit 時在 Telegram 問「部署／略過」，按了才觸發；也可在 GitHub 網頁或 `gh workflow run deploy -R Tsai-TsungLin/portfolio -f sha=<sha>` 手動跑。
+- secrets：`DEPLOY_SSH_KEY`（這個 repo 專用的 key，VM `authorized_keys` 以 `command="…/deploy-gate.sh portfolio"` 綁死，只能部署 portfolio、沒有 shell 與 port forwarding）、`DEPLOY_KNOWN_HOSTS`（VM 的 ed25519 host key）。
+- repo 是公開的，Actions log 也公開；部署 log 只含守門腳本的結果，不含任何機密。
+- 退回舊版：用同一個 workflow 指定 master 上較早的 commit。
 

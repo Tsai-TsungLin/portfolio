@@ -28,6 +28,7 @@ go build ./... && go vet ./... && go test -race ./...
 - 架構圖規格放在 `web/` 之外，不要 embed；配色一律 `meta.visual_preset: "editorial"`，不在產出後覆寫 `:root`（§3、§6）
 - 新增一張架構圖要同步三處：總覽頁加一列、該作品卡片的 `card-role` 加連結、`01-design.md` §6 的表加一列
 - 架構圖的 viewBox 有尺寸上下限（太寬字太小、太高會溢出、太矮 legend 會被靜默拿掉）；卡片三張、每張三條（§6.1）
+- Actions `deploy` workflow 只部署已在 master 上的 commit，key 在 VM 端綁死只能部署 portfolio；不要改成 push 自動部署（`02-deploy.md` §6）
 - `deploy/docker-compose.yml` 的 `name: portfolio` 不可拿掉，否則會和別的服務互頂（`02-deploy.md` §1）
 - VM 上 `sites-enabled/relexes.com` 是實體檔不是 symlink，改 `sites-available/` 不會生效也不會報錯（`02-deploy.md` §2）
 - 部署後要在 lex-console 的 `services.yaml` 登記這個服務，並更新 `../.claude/rules/infra.md` 的容器表與網域表

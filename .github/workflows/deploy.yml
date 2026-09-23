@@ -1,0 +1,59 @@
+# 手動觸發的部署：lex-console 在 Telegram 按「部署」後以 workflow_dispatch 呼叫，也可在 GitHub 網頁手動跑。
+# 走 VM 上的 deploy-gate（lex repo 的 ops/deploy-gate.sh）：這把 key 只能部署 portfolio，拿不到 shell。
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: 要部署的 commit（完整 40 碼，必須在 master 上）
+        required: true
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      # 只部署已經合進 master 的 commit，避免有人指定任意分支上的程式碼
+      - name: 確認 commit 在 master 上
+        env:
+          SHA: ${{ inputs.sha }}
+        run: |
+          [[ "$SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "sha 必須是完整 40 碼"; exit 1; }
+          git merge-base --is-ancestor "$SHA" origin/master
+          git checkout --detach "$SHA"
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: 測試
+        run: go vet ./... && go test -race ./...
+
+      - name: 編譯
+        run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o deploy/portfolio ./cmd/portfolio
+
+      - name: 部署
+        env:
+          SHA: ${{ inputs.sha }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          tar -czf - -C deploy portfolio Dockerfile docker-compose.yml \
+            | ssh -i ~/.ssh/deploy -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o BatchMode=yes \
+                lex@35.221.248.95 "deploy portfolio $SHA"
