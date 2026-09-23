@@ -1,0 +1,26 @@
+# push 與 PR 自動跑的品質門檻：每個 commit 都有自己的綠勾勾／紅叉（手動部署的 workflow 不會顯示在 commit 旁邊）
+name: ci
+
+on:
+  push:
+    branches: [master, 'claude/**']
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: build／vet／test
+        run: go build ./... && go vet ./... && go test -race ./...

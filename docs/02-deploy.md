@@ -74,4 +74,5 @@ deploy.sh 跑完不等於成功，要自己確認三件事：
 - secrets：`DEPLOY_SSH_KEY`（這個 repo 專用的 key，VM `authorized_keys` 以 `command="…/deploy-gate.sh portfolio"` 綁死，只能部署 portfolio、沒有 shell 與 port forwarding）、`DEPLOY_KNOWN_HOSTS`（VM 的 ed25519 host key）。
 - repo 是公開的，Actions log 也公開；部署 log 只含守門腳本的結果，不含任何機密。
 - 退回舊版：用同一個 workflow 指定 master 上較早的 commit。
+- 另有 `ci` workflow（push 到 master／`claude/**` 與 PR 自動跑 build、vet、test -race），commit 旁的綠勾勾看的是它；手動觸發的 `deploy` 不會顯示在 commit 旁邊。
 
