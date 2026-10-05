@@ -22,7 +22,7 @@ go build ./... && go vet ./... && go test -race ./...
 - 圖片放 `web/assets/`，同時提供 `.webp` 與 `.jpg`（`cwebp -q 80`），HTML 用 `<picture>`（§3）
 - 依賴 JS 才顯示的樣式一律掛在 `.js` 底下（`<html class="no-js">` 由 head 的 inline script 切成 `js`），無 JS 也要看得到內容（§4）
 - 灰字對比度維持 4.5:1 以上，互動元素最小觸控目標 44px（§4）
-- 作品卡片不連結到實際服務頁面，只放說明與截圖（§4）
+- 作品卡片不連結到實際服務頁面，只放說明與截圖；唯一例外是款款欸卡片的「前往網站 →」（外部連結不加 nofollow，目的是讓搜尋引擎跟著走，§4）
 - 網頁版履歷不放電話與地址；要給 104 的 PDF 另外從本機產出（§5、`02-deploy.md` §3）
 - `web/arch/*.html` 是 archify 從 `docs/arch/` 的 JSON 規格編譯出來的產物，**一律不手改**：改內容要改規格再重跑 `validate` → `deliver` → `visual-check`，三個都 `ok: true` 且 `grep -c '>Legend<'` 等於 1 才算過（§6）
 - 架構圖規格放在 `web/` 之外，不要 embed；配色一律 `meta.visual_preset: "editorial"`，不在產出後覆寫 `:root`（§3、§6）
